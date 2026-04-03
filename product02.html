@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Immunity L2 Netforce | Immunity Networks</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#ffd9dc",
+                        "background": "#131313",
+                        "outline": "#a68a8c",
+                        "on-secondary-fixed": "#390a13",
+                        "on-tertiary-fixed": "#00201d",
+                        "secondary-container": "#72373f",
+                        "tertiary": "#9bd1c8",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#131313",
+                        "secondary": "#ffb2ba",
+                        "tertiary-fixed": "#b6ede4",
+                        "surface-tint": "#ffb2ba",
+                        "surface": "#131313",
+                        "outline-variant": "#574143",
+                        "tertiary-container": "#00413b",
+                        "primary-container": "#770026",
+                        "on-tertiary-fixed-variant": "#164f49",
+                        "surface-container": "#201f1f",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#77ada5",
+                        "surface-bright": "#3a3939",
+                        "on-surface-variant": "#debfc1",
+                        "on-primary-container": "#ff778b",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "inverse-primary": "#ac2f49",
+                        "primary-fixed-dim": "#ffb2ba",
+                        "on-background": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "secondary-fixed-dim": "#ffb2ba",
+                        "surface-container-highest": "#353534",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#ffd9dc",
+                        "tertiary-fixed-dim": "#9bd1c8",
+                        "on-primary": "#670020",
+                        "surface-container-low": "#1c1b1b",
+                        "primary": "#ffb2ba",
+                        "on-secondary": "#541f27",
+                        "on-primary-fixed-variant": "#8b1533",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary": "#003732",
+                        "on-primary-fixed": "#400010",
+                        "on-secondary-fixed-variant": "#6f353d",
+                        "on-secondary-container": "#f3a3ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0e0e0e; color: #e5e2e1; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { backdrop-filter: blur(24px); background: rgba(19, 19, 19, 0.6); }
+        .crimson-gradient { background: linear-gradient(135deg, #ffb2ba 0%, #770026 100%); }
+        .hero-mask { mask-image: linear-gradient(to bottom, black 60%, transparent 100%); }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-2xl dark:bg-[#131313]/60 transition-all duration-500">
+<div class="flex justify-between items-center px-8 py-6 max-w-[1440px] mx-auto">
+<div class="text-xl font-black tracking-[-0.04em] text-[#e5e2e1]">
+                Immunity Networks
+            </div>
+<div class="hidden md:flex items-center space-x-10 font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium leading-[1.8]">
+<a class="text-[#debfc1] hover:text-[#e5e2e1] transition-colors duration-300 hover:scale-[1.02]" href="#">Solutions</a>
+<a class="text-[#ffb2ba] border-b-2 border-[#770026] pb-1 hover:scale-[1.02]" href="#">Products</a>
+<a class="text-[#debfc1] hover:text-[#e5e2e1] transition-colors duration-300 hover:scale-[1.02]" href="#">Intelligence</a>
+<a class="text-[#debfc1] hover:text-[#e5e2e1] transition-colors duration-300 hover:scale-[1.02]" href="#">Global Network</a>
+<a class="text-[#debfc1] hover:text-[#e5e2e1] transition-colors duration-300 hover:scale-[1.02]" href="#">About</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="hidden lg:block bg-primary-container text-on-surface px-6 py-2 text-xs font-bold uppercase tracking-widest hover:scale-[1.02] transition-transform duration-200 ease-out">
+                    Contact Us
+                </button>
+<span class="material-symbols-outlined text-[#ffb2ba] cursor-pointer" data-icon="menu">menu</span>
+</div>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="max-w-[1440px] mx-auto px-8 mb-40 flex flex-col items-center text-center">
+<span class="text-primary tracking-[0.4em] text-xs font-bold uppercase mb-6 block">Defense Architecture</span>
+<h1 class="text-6xl md:text-8xl font-black tracking-[-0.05em] leading-[1] mb-12 max-w-4xl">
+                L2 <span class="text-transparent bg-clip-text crimson-gradient">Netforce</span>
+</h1>
+<p class="text-on-surface-variant text-lg md:text-xl max-w-2xl leading-[1.8] mb-12">
+                Invisible, impenetrable Layer 2 network security designed for the world's most critical infrastructure. Beyond encryption—total network isolation.
+            </p>
+<div class="flex flex-col md:flex-row gap-6">
+<button class="bg-primary-container text-on-surface px-10 py-5 text-sm font-bold tracking-widest hover:scale-[1.02] transition-all">
+                    REQUEST TECHNICAL BRIEF
+                </button>
+<button class="group flex items-center gap-3 text-sm font-bold tracking-widest hover:gap-5 transition-all">
+                    EXPLORE SPECS <span class="material-symbols-outlined text-primary" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Product Visual Container -->
+<section class="w-full h-[716px] relative mb-48 hero-mask">
+<div class="absolute inset-0 bg-[#0e0e0e]">
+<img alt="High-tech server rack with glowing red fiber optic cables in a dark futuristic data center environment" class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000" data-alt="high-tech enterprise server hardware with glowing deep crimson light accents in a dark obsidian-toned data center environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnDBlJ4lx0RPQNXxqLF8L4Ob-jabWNEj66N-RU5vi1rHfkm6rkYnRh0y9DD-YxwB8bM5aeL-GCF6rhcQvXlmxK97ADl5VSrpRWiKBvRL2TCyHAeLPy67jb3D86R9XFfa3AkTEp6K68Ypa9n5JOsRKP1-b10pCcKiHsKwaghNP6GnmxwDC6FLgSJ1gAZccjD3vMMu5dQu57jWL7F_bEmjiEIADv-ytVjanhnqyqBMFliaGKGb7CR1qw0nuR6aSzkJ4fqqR6Z3X7eKs"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] to-transparent"></div>
+</section>
+<!-- Bento Grid: Key Pillars -->
+<section class="max-w-[1440px] mx-auto px-8 mb-48">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
+<!-- Pillar 1: Stealth -->
+<div class="md:col-span-8 bg-surface-container rounded-md p-12 flex flex-col justify-between overflow-hidden relative group">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary text-4xl mb-8" data-icon="shield_lock" data-weight="fill">shield_lock</span>
+<h3 class="text-4xl font-bold tracking-tighter mb-4">Stealth Mode Operation</h3>
+<p class="text-on-surface-variant max-w-md leading-relaxed">
+                            Ensures the hardware is invisible to scanning tools. If they can't see you, they can't attack you. Complete network obfuscation at the physical layer.
+                        </p>
+</div>
+<img alt="Abstract dark network mesh with glowing nodes" class="absolute right-0 bottom-0 w-1/2 opacity-20 group-hover:scale-110 transition-transform duration-700" data-alt="abstract digital network nodes connected by glowing red threads over a dark textured obsidian background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3s6BsQQqAtQGemzyG8Ax-FdGAxCKRTNSKGzlZEX95_BpgV94Fz50J8FdIvQRNnEShnvy_vqOqCzyrrflCPZAgaBPMSu4llktQNq3ODsWAvbVMKWb61egL3jQRuXLDVI5lcJt5zt5E6lzHy7IUoSBOrpzcY9i0OyUt0WwIv-OIkFwAgFtgAxvN-eVraOQooIK0EwouT4VgFdjQpbb8fSWSh1DVZFfgh-RZYf6YxeyB4PMHwBTTzxDB9GBakjuqfbD3s2eOjKKulCQ"/>
+</div>
+<!-- Pillar 2: Micro-segmentation -->
+<div class="md:col-span-4 bg-primary-container rounded-md p-12 flex flex-col justify-end text-on-surface">
+<span class="material-symbols-outlined text-5xl mb-8" data-icon="grid_view">grid_view</span>
+<h3 class="text-3xl font-bold tracking-tighter mb-4">Infinite Segmentation</h3>
+<p class="text-secondary leading-relaxed opacity-80">
+                        Create isolated micro-perimeters for every critical asset without the complexity of traditional VLANs.
+                    </p>
+</div>
+<!-- Pillar 3: Real-time Analysis -->
+<div class="md:col-span-4 bg-surface-container-high rounded-md p-12 flex flex-col items-center justify-center text-center group">
+<div class="w-24 h-24 rounded-full border border-outline-variant flex items-center justify-center mb-8 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="query_stats">query_stats</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">Zero-Latency Analysis</h3>
+<p class="text-on-surface-variant text-sm px-4">Deep packet inspection at wire speed with zero performance degradation.</p>
+</div>
+<!-- Pillar 4: Hardened Shell -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-md p-12 flex flex-col md:flex-row items-center gap-12">
+<div class="flex-1">
+<h3 class="text-4xl font-bold tracking-tighter mb-6">Military-Grade Resilience</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-on-surface-variant">FIPS 140-2 Level 4 Compliance</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-on-surface-variant">Tamper-Evident Physical Chassis</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-on-surface-variant">Quantum-Ready Key Exchange</span>
+</div>
+</div>
+</div>
+<div class="flex-1 bg-surface-container p-8 rounded-md">
+<img alt="Macro shot of a high-end circuit board" class="w-full grayscale opacity-50" data-alt="extreme macro close-up of a high-performance industrial circuit board with premium red metallic components" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDptVGJXMiZ-X4LGBmc6s-MbWjeTiGYdD2QAGisWkB4b4uHE5MVf2Ib9NHtFwQauvcuHTXBp-T4KJqfWcHikDkoV5bJz9gXmMfB_xlKvKiC2Hbi8smiJxs5tr77EY8sTb2uB6qLp9d3Jp644PlWwXXooIkQVNCD2wlphA0nqUlgTJ3snHC86acPe064lSPHf4IYQJk06Oui1KN8kAktbHImHDKReKPCOJaTism58gLQN_3qRmo3tq0tS1bXN-ngleyHGBMlHOL7G1s"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature List: Editorial Style -->
+<section class="max-w-[1440px] mx-auto px-8 mb-48">
+<div class="flex flex-col md:flex-row gap-24">
+<div class="md:w-1/3">
+<h2 class="text-sm font-bold uppercase tracking-[0.3em] text-primary mb-8">Technical Superiority</h2>
+<p class="text-4xl font-bold tracking-tight leading-tight">The new standard for network integrity.</p>
+</div>
+<div class="md:w-2/3 space-y-16">
+<div class="group border-b border-outline-variant/10 pb-12">
+<div class="flex justify-between items-start mb-6">
+<h4 class="text-2xl font-bold">Layer 2 Obfuscation</h4>
+<span class="text-primary font-mono">01</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed max-w-xl">
+                            By operating below the IP layer, L2 Netforce renders your critical assets invisible to the public internet and malicious internal scans. It’s not just hidden; it’s non-existent to the adversary.
+                        </p>
+</div>
+<div class="group border-b border-outline-variant/10 pb-12">
+<div class="flex justify-between items-start mb-6">
+<h4 class="text-2xl font-bold">Protocol Agnostic Protection</h4>
+<span class="text-primary font-mono">02</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed max-w-xl">
+                            Whether it's SCADA, proprietary industrial protocols, or standard enterprise traffic, our architecture treats all packets with the same rigorous isolation protocols.
+                        </p>
+</div>
+<div class="group border-b border-outline-variant/10 pb-12">
+<div class="flex justify-between items-start mb-6">
+<h4 class="text-2xl font-bold">Autonomous Countermeasures</h4>
+<span class="text-primary font-mono">03</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed max-w-xl">
+                            L2 Netforce doesn't just alert; it reacts. Instantaneous port-blocking and traffic rerouting happen in milliseconds upon detection of anomalous patterns.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-[1440px] mx-auto px-8 mb-48">
+<div class="bg-surface-container rounded-none p-20 flex flex-col items-center text-center relative overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-primary"></div>
+<h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-10 mt-16 max-w-3xl">Ready to secure the core?</h2>
+<p class="text-on-surface-variant text-lg mb-12 max-w-xl">Schedule a private demonstration of the L2 Netforce architecture with our senior engineering team.</p>
+<div class="flex flex-wrap justify-center gap-6">
+<button class="bg-on-surface text-background px-12 py-5 text-sm font-bold tracking-widest hover:bg-primary hover:text-white transition-all">
+                        SCHEDULE DEMO
+                    </button>
+<button class="border border-outline-variant px-12 py-5 text-sm font-bold tracking-widest hover:border-primary transition-all">
+                        DOWNLOAD DATASHEET
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-24 px-8 mt-32 bg-surface-container-lowest dark:bg-[#0e0e0e] border-t border-outline-variant/5">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-16 max-w-[1440px] mx-auto items-start">
+<div class="col-span-1 md:col-span-1">
+<div class="text-2xl font-black tracking-[-0.04em] text-[#e5e2e1] mb-8">
+                    Immunity Networks
+                </div>
+<p class="text-[#debfc1] font-['Plus_Jakarta_Sans'] text-sm leading-[1.8] opacity-70">
+                    Defending the world's most critical digital frontiers with next-generation network hardware.
+                </p>
+</div>
+<div class="space-y-4">
+<h5 class="text-[#770026] dark:text-[#ffb2ba] font-bold text-xs uppercase tracking-widest mb-6">Products</h5>
+<ul class="space-y-4 font-['Plus_Jakarta_Sans'] text-sm">
+<li><a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">L2 Netforce</a></li>
+<li><a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Immunity SIEM</a></li>
+<li><a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Quantum Gateway</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-[#770026] dark:text-[#ffb2ba] font-bold text-xs uppercase tracking-widest mb-6">Company</h5>
+<ul class="space-y-4 font-['Plus_Jakarta_Sans'] text-sm">
+<li><a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">About Us</a></li>
+<li><a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Global Network</a></li>
+<li><a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Press Kit</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-[#770026] dark:text-[#ffb2ba] font-bold text-xs uppercase tracking-widest mb-6">Legal</h5>
+<ul class="space-y-4 font-['Plus_Jakarta_Sans'] text-sm">
+<li><a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Privacy Policy</a></li>
+<li><a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Terms of Service</a></li>
+<li><a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Security Architecture</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto mt-24 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<span class="text-[#debfc1] text-xs opacity-50">© 2024 Immunity Networks. All rights reserved.</span>
+<div class="flex gap-8">
+<a class="text-[#debfc1] opacity-50 hover:opacity-100 transition-opacity" href="#"><span class="material-symbols-outlined text-lg" data-icon="language">language</span></a>
+<a class="text-[#debfc1] opacity-50 hover:opacity-100 transition-opacity font-bold text-xs uppercase tracking-widest" href="#">LinkedIn</a>
+<a class="text-[#debfc1] opacity-50 hover:opacity-100 transition-opacity font-bold text-xs uppercase tracking-widest" href="#">Twitter</a>
+</div>
+</div>
+</footer>
+</body></html>

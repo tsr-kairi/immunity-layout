@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Immunity Networks | Abstract Data Synthesis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --onyx-black: #080808;
+            --electric-crimson: #ff003c;
+            --deep-crimson: #4a0012;
+            --glass-white: rgba(255, 255, 255, 0.03);
+            --border-crimson: rgba(255, 0, 60, 0.2);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--onyx-black);
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        .text-display {
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+        }
+        .glow-crimson {
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
+        }
+        .bg-data-grid {
+            background-image: 
+                linear-gradient(to right, rgba(255, 0, 60, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 0, 60, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .data-flow-gradient {
+            background: linear-gradient(180deg, transparent 0%, var(--deep-crimson) 50%, transparent 100%);
+            opacity: 0.15;
+            width: 1px;
+            height: 100%;
+        }
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-crimson);
+        }
+        .asymmetric-clip {
+            clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+        }
+        .abstract-viz {
+            background: radial-gradient(circle at center, var(--electric-crimson) 0%, transparent 70%);
+            filter: blur(60px);
+            opacity: 0.1;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--electric-crimson), transparent);
+            position: absolute;
+            z-index: 10;
+        }
+        .sidebar-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+    </style>
+</head>
+<body class="selection:bg-electric-crimson selection:text-white">
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute inset-0 bg-data-grid opacity-30"></div>
+<div class="absolute left-10 top-0 h-full w-[1px] bg-white/5"></div>
+<div class="absolute right-10 top-0 h-full w-[1px] bg-white/5"></div>
+<div class="absolute top-20 left-0 w-full h-[1px] bg-white/5"></div>
+</div>
+<nav class="fixed top-0 w-full z-50 px-10 py-8 flex justify-between items-center mix-blend-difference">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-electric-crimson flex items-center justify-center">
+<span class="material-symbols-outlined text-black font-black" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<span class="text-display text-xl uppercase tracking-widest">Immunity.NET</span>
+</div>
+<div class="hidden lg:flex items-center gap-16 font-bold text-[10px] uppercase tracking-[0.3em]">
+<a class="hover:text-electric-crimson transition-colors" href="#">Synthesis</a>
+<a class="hover:text-electric-crimson transition-colors" href="#">Nodes</a>
+<a class="hover:text-electric-crimson transition-colors" href="#">Protocols</a>
+<a class="hover:text-electric-crimson transition-colors" href="#">Vault</a>
+</div>
+<button class="border border-electric-crimson px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] hover:bg-electric-crimson hover:text-black transition-all">
+        Encrypted Portal
+    </button>
+</nav>
+<main class="relative z-10">
+<section class="min-h-screen flex items-center px-10 relative pt-20">
+<div class="grid grid-cols-12 w-full gap-4 relative">
+<div class="col-span-12 lg:col-span-8 z-20">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-[1px] bg-electric-crimson"></div>
+<span class="text-[10px] font-black uppercase tracking-[0.5em] text-electric-crimson">Operational Status: Sovereign</span>
+</div>
+<h1 class="text-display text-[14vw] lg:text-[11vw] mb-8 leading-[0.85] text-white">
+                    SYNTHESIZE<br/>
+<span class="text-electric-crimson glow-crimson">DEFENSE.</span>
+</h1>
+<p class="text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-12">
+                    Advanced cyber-defense systems engineered as a living synthesis. We transform raw architectural telemetry into impenetrable digital fortresses.
+                </p>
+<div class="flex flex-wrap gap-6">
+<button class="bg-electric-crimson text-black px-10 py-6 font-black uppercase tracking-widest text-xs flex items-center gap-4 group">
+                        Initialize Protocol
+                        <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform" data-icon="arrow_right_alt">arrow_right_alt</span>
+</button>
+<button class="border border-white/20 px-10 py-6 font-black uppercase tracking-widest text-xs flex items-center gap-4 hover:border-electric-crimson transition-colors">
+                        Core Architecture
+                    </button>
+</div>
+</div>
+<div class="hidden lg:block lg:col-span-4 relative h-[600px]">
+<div class="absolute inset-0 abstract-viz"></div>
+<div class="absolute top-0 right-0 glass-card p-6 w-full h-full flex flex-col justify-between border-l-0">
+<div class="flex justify-between items-start">
+<div class="text-[10px] font-mono text-gray-500 uppercase tracking-tighter leading-tight">
+                            DATA_PACKET_STREAM [READY]<br/>
+                            ENCRYPTION_LAYER_04<br/>
+                            LATENCY: 0.002MS
+                        </div>
+<span class="material-symbols-outlined text-electric-crimson animate-pulse" data-icon="radar">radar</span>
+</div>
+<div class="flex-grow flex items-end justify-center py-12">
+<div class="w-full space-y-4">
+<div class="h-px w-full bg-white/10 relative"><div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-electric-crimson"></div></div>
+<div class="h-px w-3/4 bg-white/10 relative"><div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-electric-crimson"></div></div>
+<div class="h-px w-1/2 bg-white/10 relative"><div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-electric-crimson"></div></div>
+<div class="h-px w-full bg-white/10 relative"><div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-electric-crimson"></div></div>
+</div>
+</div>
+<div class="text-[60px] font-black leading-none text-white/5 select-none uppercase">IMMUNITY</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-40 px-10 bg-[var(--onyx-black)] border-y border-white/5 relative overflow-hidden">
+<div class="max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5">
+<div class="bg-[var(--onyx-black)] p-12 relative group overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-0 bg-electric-crimson transition-all duration-500 group-hover:h-full"></div>
+<span class="text-display text-7xl text-white mb-2 block">99.9<span class="text-electric-crimson">%</span></span>
+<span class="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Threat Neutralized</span>
+</div>
+<div class="bg-[var(--onyx-black)] p-12 relative group overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-0 bg-electric-crimson transition-all duration-500 group-hover:h-full"></div>
+<span class="text-display text-7xl text-white mb-2 block">12<span class="text-electric-crimson">ms</span></span>
+<span class="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Node Latency</span>
+</div>
+<div class="bg-[var(--onyx-black)] p-12 relative group overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-0 bg-electric-crimson transition-all duration-500 group-hover:h-full"></div>
+<span class="text-display text-7xl text-white mb-2 block">500<span class="text-electric-crimson">+</span></span>
+<span class="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Global Nodes</span>
+</div>
+<div class="bg-[var(--onyx-black)] p-12 relative group overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-0 bg-electric-crimson transition-all duration-500 group-hover:h-full"></div>
+<span class="text-display text-7xl text-white mb-2 block">24<span class="text-electric-crimson">/7</span></span>
+<span class="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Active Vigilance</span>
+</div>
+</div>
+</div>
+</section>
+<section class="py-40 px-10 bg-black/40">
+<div class="max-w-screen-2xl mx-auto">
+<div class="flex flex-col lg:flex-row justify-between items-end mb-24 gap-12">
+<div class="max-w-2xl">
+<h2 class="text-display text-7xl lg:text-9xl text-white mb-8">THE <span class="text-electric-crimson">MODULES.</span></h2>
+<p class="text-gray-400 text-xl font-light">Modular components for deep-layer defense integration.</p>
+</div>
+<div class="flex-grow h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+<span class="sidebar-label text-[10px] font-bold uppercase tracking-[0.5em] text-electric-crimson opacity-50 hidden lg:block">System Configuration v4.0</span>
+</div>
+<div class="grid grid-cols-12 gap-6">
+<div class="col-span-12 lg:col-span-8 h-[600px] glass-card p-16 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-electric-crimson/10 rounded-full blur-[80px] -mr-32 -mt-32"></div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<span class="material-symbols-outlined text-5xl text-electric-crimson mb-12 block" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+<h3 class="text-display text-5xl text-white mb-6">SOVEREIGN SENTINEL</h3>
+<p class="text-gray-400 text-lg max-w-md leading-relaxed">AI-driven predictive analysis engine that identifies zero-day vulnerabilities through atmospheric scanning and behavioral data flow analysis.</p>
+</div>
+<div class="flex items-center gap-12">
+<a class="text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-4 text-electric-crimson" href="#">
+<span>Deploy Protocol</span>
+<span class="material-symbols-outlined text-sm" data-icon="north_east">north_east</span>
+</a>
+<div class="flex items-center gap-2">
+<div class="w-1 h-1 bg-white/20"></div>
+<div class="w-1 h-1 bg-white/20"></div>
+<div class="w-8 h-1 bg-electric-crimson"></div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 right-0 w-1/2 h-full flex items-center justify-center opacity-10 pointer-events-none grayscale">
+<span class="material-symbols-outlined text-[400px]" data-icon="fingerprint">fingerprint</span>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 h-[600px] bg-electric-crimson p-16 flex flex-col justify-between group cursor-pointer overflow-hidden relative">
+<div class="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-5xl text-black group-hover:text-electric-crimson transition-colors" data-icon="hub">hub</span>
+<h3 class="text-display text-4xl text-black group-hover:text-white mt-12 transition-colors">NEXUS CORE</h3>
+</div>
+<div class="relative z-10">
+<p class="text-black/80 group-hover:text-gray-400 mb-8 transition-colors">Centralized command for distributed global infrastructure monitoring.</p>
+<div class="w-12 h-12 rounded-full border-2 border-black group-hover:border-electric-crimson flex items-center justify-center transition-all">
+<span class="material-symbols-outlined text-black group-hover:text-electric-crimson" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 glass-card p-12 group hover:bg-white/[0.05] transition-all">
+<span class="material-symbols-outlined text-white/50 mb-8 block group-hover:text-electric-crimson" data-icon="key_visualizer">key_visualizer</span>
+<h4 class="text-display text-xl text-white mb-4">ENCRYPTION FLUX</h4>
+<p class="text-sm text-gray-500 leading-relaxed">Dynamic key rotation at every network heartbeat.</p>
+</div>
+<div class="col-span-12 lg:col-span-4 glass-card p-12 group hover:bg-white/[0.05] transition-all border-l-0">
+<span class="material-symbols-outlined text-white/50 mb-8 block group-hover:text-electric-crimson" data-icon="terminal">terminal</span>
+<h4 class="text-display text-xl text-white mb-4">GHOST PROTOCOL</h4>
+<p class="text-sm text-gray-400 leading-relaxed">Invisible network tunneling for sovereign communications.</p>
+</div>
+<div class="col-span-12 lg:col-span-4 glass-card p-12 group hover:bg-white/[0.05] transition-all border-l-0">
+<span class="material-symbols-outlined text-white/50 mb-8 block group-hover:text-electric-crimson" data-icon="policy">policy</span>
+<h4 class="text-display text-xl text-white mb-4">COMPLIANCE AI</h4>
+<p class="text-sm text-gray-400 leading-relaxed">Automated regulatory mapping for zero-latency audits.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-40 px-10">
+<div class="max-w-screen-2xl mx-auto flex flex-col lg:flex-row gap-24 relative">
+<div class="lg:w-1/3 sticky top-32 h-fit">
+<h2 class="text-display text-6xl text-white mb-12">REDEFINED <br/><span class="text-electric-crimson">EXPERTISY.</span></h2>
+<div class="space-y-6">
+<div class="flex items-center gap-4 py-4 border-b border-white/5 group cursor-pointer">
+<span class="text-[10px] text-electric-crimson font-mono">01</span>
+<span class="text-xl font-bold group-hover:translate-x-2 transition-transform">QUANTUM RESISTANCE</span>
+</div>
+<div class="flex items-center gap-4 py-4 border-b border-white/5 group cursor-pointer">
+<span class="text-[10px] text-electric-crimson font-mono">02</span>
+<span class="text-xl font-bold group-hover:translate-x-2 transition-transform">FORENSIC INTEGRITY</span>
+</div>
+<div class="flex items-center gap-4 py-4 border-b border-white/5 group cursor-pointer">
+<span class="text-[10px] text-electric-crimson font-mono">03</span>
+<span class="text-xl font-bold group-hover:translate-x-2 transition-transform">INSPECTION FABRIC</span>
+</div>
+</div>
+</div>
+<div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 border border-white/5">
+<div class="bg-[var(--onyx-black)] p-12">
+<div class="w-10 h-10 bg-white/5 mb-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-electric-crimson" data-icon="psychology">psychology</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-6">Tactical Intelligence</h4>
+<p class="text-gray-400 font-light leading-relaxed">Deep-web harvesting of adversary chatter to predict and intercept attack vectors before they reach your sovereign perimeter.</p>
+</div>
+<div class="bg-[var(--onyx-black)] p-12">
+<div class="w-10 h-10 bg-white/5 mb-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-electric-crimson" data-icon="auto_fix">auto_fix</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-6">Autonomous Remediation</h4>
+<p class="text-gray-400 font-light leading-relaxed">Self-healing network fabrics that isolate compromised segments and re-route traffic in milliseconds with zero administrative overhead.</p>
+</div>
+<div class="bg-[var(--onyx-black)] p-12">
+<div class="w-10 h-10 bg-white/5 mb-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-electric-crimson" data-icon="edgesensor_high">edgesensor_high</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-6">Hardened Edge</h4>
+<p class="text-gray-400 font-light leading-relaxed">Deploying compute power at the network edge to eliminate the vulnerabilities inherent in centralized data loops.</p>
+</div>
+<div class="bg-[var(--onyx-black)] p-12">
+<div class="w-10 h-10 bg-white/5 mb-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-electric-crimson" data-icon="fingerprint">fingerprint</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-6">Identity Sovereignty</h4>
+<p class="text-gray-400 font-light leading-relaxed">Multi-layered biometric and behavioral authentication that adapts to the current threat landscape in real-time.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-40 px-10 relative overflow-hidden">
+<div class="absolute inset-0 abstract-viz opacity-5"></div>
+<div class="max-w-screen-2xl mx-auto">
+<div class="flex justify-between items-baseline mb-24">
+<h2 class="text-display text-7xl lg:text-9xl text-white">IMPACT <span class="text-electric-crimson">REPORTS.</span></h2>
+<span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/40">Archive_2024</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="group cursor-pointer relative">
+<div class="aspect-[16/10] bg-zinc-900 border border-white/10 overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-electric-crimson/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute inset-0 p-12 flex flex-col justify-end">
+<span class="text-[10px] font-black uppercase tracking-[0.4em] text-electric-crimson mb-4">Financial Sector</span>
+<h3 class="text-display text-4xl text-white mb-4">THE BANKING VAULT</h3>
+<p class="text-gray-400 text-sm max-w-sm">Securing cross-border infrastructure for the European central networks.</p>
+</div>
+<div class="absolute top-12 right-12 w-32 h-32 border border-white/5 rounded-full flex items-center justify-center">
+<div class="w-24 h-24 border-2 border-electric-crimson/20 rounded-full animate-pulse"></div>
+</div>
+</div>
+</div>
+<div class="group cursor-pointer relative translate-y-12 lg:translate-y-24">
+<div class="aspect-[16/10] bg-zinc-900 border border-white/10 overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-electric-crimson/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute inset-0 p-12 flex flex-col justify-end">
+<span class="text-[10px] font-black uppercase tracking-[0.4em] text-electric-crimson mb-4">Energy Grids</span>
+<h3 class="text-display text-4xl text-white mb-4">GRID GUARDIAN</h3>
+<p class="text-gray-400 text-sm max-w-sm">Protecting mission-critical power distribution against lateral infiltration.</p>
+</div>
+<div class="absolute top-12 right-12 w-32 h-32 border border-white/5 rounded-full flex items-center justify-center">
+<div class="w-24 h-24 border-2 border-electric-crimson/20 rounded-full animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-60 px-10 text-center">
+<div class="max-w-5xl mx-auto">
+<span class="material-symbols-outlined text-8xl text-electric-crimson/20 mb-12" data-icon="shield">shield</span>
+<blockquote class="text-display text-3xl md:text-5xl lg:text-6xl text-white italic leading-[1.2] mb-16">
+                "Immunity Networks has redefined what we thought was possible in digital resilience. They are the only partner we trust with our <span class="text-electric-crimson">sovereign assets.</span>"
+            </blockquote>
+<div class="inline-block h-1 w-24 bg-electric-crimson mb-8"></div>
+<div class="flex flex-col items-center">
+<span class="text-2xl font-bold text-white mb-2">Director of Intelligence</span>
+<span class="text-[10px] font-black uppercase tracking-[0.5em] text-gray-500">Global Operations Command</span>
+</div>
+</div>
+</section>
+<section class="py-40 px-10 relative">
+<div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
+<div>
+<h2 class="text-display text-7xl text-white mb-12">INITIATE <br/><span class="text-electric-crimson">SYNTHESIS.</span></h2>
+<p class="text-gray-400 text-xl font-light mb-12 max-w-md">For inquiries regarding sovereign-grade infrastructure defense, use the secure channel below.</p>
+<div class="space-y-8">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-electric-crimson" data-icon="pin_drop">pin_drop</span>
+</div>
+<div>
+<div class="text-[10px] font-black uppercase tracking-widest text-gray-500">Central Hub</div>
+<div class="text-lg font-bold">Zurich, Switzerland</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-electric-crimson" data-icon="fingerprint">fingerprint</span>
+</div>
+<div>
+<div class="text-[10px] font-black uppercase tracking-widest text-gray-500">Security Signature</div>
+<div class="text-lg font-bold">0xFD29...B4A</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white/5 border border-white/10 p-16 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-electric-crimson/5 blur-[40px]"></div>
+<form class="space-y-10 relative z-10">
+<div class="group relative">
+<label class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 mb-4 block group-focus-within:text-electric-crimson transition-colors">Identification</label>
+<input class="w-full bg-transparent border-0 border-b border-white/10 px-0 py-4 focus:ring-0 focus:border-electric-crimson transition-all text-white placeholder:text-zinc-700" placeholder="Agent / Designation" type="text"/>
+</div>
+<div class="group relative">
+<label class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 mb-4 block group-focus-within:text-electric-crimson transition-colors">Encrypted Endpoint</label>
+<input class="w-full bg-transparent border-0 border-b border-white/10 px-0 py-4 focus:ring-0 focus:border-electric-crimson transition-all text-white placeholder:text-zinc-700" placeholder="official@sovereign.ext" type="email"/>
+</div>
+<div class="group relative">
+<label class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 mb-4 block group-focus-within:text-electric-crimson transition-colors">Protocol Requirements</label>
+<textarea class="w-full bg-transparent border-0 border-b border-white/10 px-0 py-4 focus:ring-0 focus:border-electric-crimson transition-all text-white placeholder:text-zinc-700 resize-none" placeholder="Detail the scope of defense synthesis..." rows="4"></textarea>
+</div>
+<button class="w-full bg-electric-crimson text-black py-6 font-black uppercase tracking-[0.4em] text-xs hover:bg-white transition-all" type="submit">Submit Protocol Request</button>
+</form>
+</div>
+</div>
+</section>
+</main>
+<footer class="py-24 px-10 border-t border-white/5 relative">
+<div class="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between gap-16">
+<div class="lg:w-1/3">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-8 h-8 bg-electric-crimson flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-sm font-black" data-icon="security">security</span>
+</div>
+<span class="text-display text-lg uppercase tracking-widest">Immunity Networks</span>
+</div>
+<p class="text-gray-500 font-light leading-relaxed mb-12">Building the future of sovereign digital defense through unmatched intelligence and engineering precision.</p>
+<div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/20">© 2024 Synthesis Unit. All Rights Reserved.</div>
+</div>
+<div class="flex flex-wrap gap-24">
+<div class="flex flex-col gap-6">
+<h5 class="text-electric-crimson font-black text-[10px] uppercase tracking-[0.4em] mb-4">Nav_System</h5>
+<a class="text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-tight" href="#">Privacy Protocol</a>
+<a class="text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-tight" href="#">Terms of Use</a>
+<a class="text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-tight" href="#">Access Control</a>
+</div>
+<div class="flex flex-col gap-6">
+<h5 class="text-electric-crimson font-black text-[10px] uppercase tracking-[0.4em] mb-4">Intelligence</h5>
+<a class="text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-tight" href="#">Global Offices</a>
+<a class="text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-tight" href="#">Field Ops</a>
+<a class="text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-tight" href="#">Threat Intel</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

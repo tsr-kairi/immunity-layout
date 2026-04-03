@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#ffd9dc",
+                    "background": "#131313",
+                    "outline": "#a68a8c",
+                    "on-secondary-fixed": "#390a13",
+                    "on-tertiary-fixed": "#00201d",
+                    "secondary-container": "#72373f",
+                    "tertiary": "#9bd1c8",
+                    "surface-container-high": "#2a2a2a",
+                    "on-surface": "#e5e2e1",
+                    "error": "#ffb4ab",
+                    "surface-dim": "#131313",
+                    "secondary": "#ffb2ba",
+                    "tertiary-fixed": "#b6ede4",
+                    "surface-tint": "#ffb2ba",
+                    "surface": "#131313",
+                    "outline-variant": "#574143",
+                    "tertiary-container": "#00413b",
+                    "primary-container": "#770026",
+                    "on-tertiary-fixed-variant": "#164f49",
+                    "surface-container": "#201f1f",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-tertiary-container": "#77ada5",
+                    "surface-bright": "#3a3939",
+                    "on-surface-variant": "#debfc1",
+                    "on-primary-container": "#ff778b",
+                    "inverse-surface": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "inverse-primary": "#ac2f49",
+                    "primary-fixed-dim": "#ffb2ba",
+                    "on-background": "#e5e2e1",
+                    "surface-variant": "#353534",
+                    "secondary-fixed-dim": "#ffb2ba",
+                    "surface-container-highest": "#353534",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#ffd9dc",
+                    "tertiary-fixed-dim": "#9bd1c8",
+                    "on-primary": "#670020",
+                    "surface-container-low": "#1c1b1b",
+                    "primary": "#ffb2ba",
+                    "on-secondary": "#541f27",
+                    "on-primary-fixed-variant": "#8b1533",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary": "#003732",
+                    "on-primary-fixed": "#400010",
+                    "on-secondary-fixed-variant": "#6f353d",
+                    "on-secondary-container": "#f3a3ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0e0e0e; color: #e5e2e1; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+        .crimson-indicator { position: relative; }
+        .crimson-indicator::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 100%; height: 2px; background-color: #770026; }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-2xl dark:bg-[#131313]/60 font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium leading-[1.8] flex justify-between items-center px-8 py-6 max-w-[1440px] left-1/2 -translate-x-1/2">
+<div class="text-xl font-black tracking-[-0.04em] text-[#e5e2e1]">Immunity Networks</div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="text-[#debfc1] hover:text-[#e5e2e1] transition-colors duration-300 hover:scale-[1.02]" href="#">Solutions</a>
+<a class="text-[#ffb2ba] border-b-2 border-[#770026] pb-1 hover:scale-[1.02]" href="#">Products</a>
+<a class="text-[#debfc1] hover:text-[#e5e2e1] transition-colors duration-300 hover:scale-[1.02]" href="#">Intelligence</a>
+<a class="text-[#debfc1] hover:text-[#e5e2e1] transition-colors duration-300 hover:scale-[1.02]" href="#">Global Network</a>
+<a class="text-[#debfc1] hover:text-[#e5e2e1] transition-colors duration-300 hover:scale-[1.02]" href="#">About</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="bg-primary-container text-on-surface px-6 py-2.5 text-sm font-bold tracking-tight hover:scale-[1.02] transition-transform duration-200 ease-out">
+                Contact Us
+            </button>
+<span class="material-symbols-outlined text-[#e5e2e1] cursor-pointer" data-icon="menu">menu</span>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="max-w-[1440px] mx-auto px-8 mb-40 relative">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<div class="inline-flex items-center space-x-3 mb-8">
+<span class="h-[1px] w-12 bg-primary"></span>
+<span class="text-primary text-sm font-bold uppercase tracking-[0.2em]">Enterprise Networking</span>
+</div>
+<h1 class="text-6xl md:text-8xl font-black tracking-[-0.04em] leading-[1.05] text-on-surface mb-12">
+                        Resilient. <br/>Autonomous. <br/><span class="text-primary-container">Architected.</span>
+</h1>
+<p class="text-body-lg text-on-surface-variant max-w-xl leading-[1.8] mb-12">
+                        Immunity Networks provides a world-class foundation for global enterprises. We don't just connect offices; we engineer high-performance, self-healing environments that safeguard your critical assets.
+                    </p>
+<div class="flex flex-wrap gap-8 items-center">
+<button class="bg-primary-container text-on-surface px-10 py-5 text-base font-extrabold tracking-tight hover:scale-[1.02] transition-all duration-300 flex items-center group">
+                            Explore Architecture
+                            <span class="material-symbols-outlined ml-3 group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<a class="font-bold text-on-surface border-b-2 border-on-surface hover:border-primary-container transition-colors py-1" href="#">View Case Studies</a>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] bg-surface-container relative overflow-hidden">
+<img alt="Abstract futuristic server room" class="w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-700 hover:scale-105" data-alt="Futuristic high-tech data center with glowing crimson red fiber optic cables and dark onyx server racks in dramatic perspective" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfXcUXnExWuTe1tPKkXzg3aGFlKju3KkeV0QcvH735xAZ_S7XriXcQluTukd6ti7ex-4ro3-uNZcAhqPnzSCPSdyuWg4TCg0gOTFTDaOxHKPQthMn6GJudu2YgY72ayuypIM-IhNxv0myIKObOqnW2wPfSfipmK1O7zufsMfYe_imZmjh4mDGEvmaM1tsvqEtldEI4XoGYj71Ss-eE1Qjz0tBLMU0QkrF-kAuBp10j2l_FDUV3hODr25D97FddYZOPKKj4aCCKuNY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<!-- Floating Stat Card -->
+<div class="absolute -bottom-8 -left-12 glass-panel bg-surface-container/80 p-10 max-w-[280px]">
+<div class="text-4xl font-black text-primary mb-2">99.999%</div>
+<div class="text-sm font-bold text-on-surface uppercase tracking-widest">Network Uptime SLA</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Service Breakdown: Bento Grid -->
+<section class="max-w-[1440px] mx-auto px-8 mb-40">
+<div class="flex justify-between items-end mb-24">
+<div class="max-w-2xl">
+<h2 class="text-4xl font-black tracking-tight mb-6">Strategic Core Competencies</h2>
+<p class="text-on-surface-variant leading-[1.8]">Our services are modular by design, allowing for seamless integration into existing infrastructure or complete architectural transformation.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Large Feature -->
+<div class="md:col-span-2 bg-surface-container p-12 hover:bg-surface-container-high transition-colors duration-500 flex flex-col justify-between min-h-[500px]">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-8" data-icon="hub">hub</span>
+<h3 class="text-3xl font-bold mb-6">SD-WAN Optimization</h3>
+<p class="text-on-surface-variant max-w-md leading-relaxed">Leverage intelligent traffic steering and application-aware routing to maximize bandwidth efficiency across your entire global footprint.</p>
+</div>
+<div class="flex items-center space-x-6">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center text-[10px] font-bold">AWS</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center text-[10px] font-bold">AZR</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center text-[10px] font-bold">GCP</div>
+</div>
+<span class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Cloud Agnostic Integration</span>
+</div>
+</div>
+<!-- Vertical Card -->
+<div class="bg-primary-container p-12 flex flex-col justify-between group">
+<div>
+<span class="material-symbols-outlined text-on-surface text-4xl mb-8" data-icon="security">security</span>
+<h3 class="text-3xl font-bold mb-6">Zero Trust Network Access</h3>
+<p class="text-on-surface/80 leading-relaxed">Identity-centric security that eliminates implicit trust, ensuring every user and device is verified before accessing critical resources.</p>
+</div>
+<a class="flex items-center text-sm font-black uppercase tracking-widest mt-12" href="#">
+                        Detailed Specs
+                        <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+<!-- Three Bottom Cards -->
+<div class="bg-surface-container p-12 hover:bg-surface-container-high transition-colors duration-500">
+<span class="material-symbols-outlined text-primary text-3xl mb-8" data-icon="settings_ethernet">settings_ethernet</span>
+<h4 class="text-xl font-bold mb-4">Core Switching</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Ultra-low latency switching fabric for high-density compute environments.</p>
+</div>
+<div class="bg-surface-container p-12 hover:bg-surface-container-high transition-colors duration-500">
+<span class="material-symbols-outlined text-primary text-3xl mb-8" data-icon="wifi_tethering">wifi_tethering</span>
+<h4 class="text-xl font-bold mb-4">Wireless Mobility</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Next-gen Wi-Fi 6E architecture optimized for massive IoT and user density.</p>
+</div>
+<div class="bg-surface-container p-12 hover:bg-surface-container-high transition-colors duration-500">
+<span class="material-symbols-outlined text-primary text-3xl mb-8" data-icon="monitoring">monitoring</span>
+<h4 class="text-xl font-bold mb-4">Unified Visibility</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Real-time telemetry and AI-driven insights across every network node.</p>
+</div>
+</div>
+</section>
+<!-- Editorial Content Section -->
+<section class="bg-surface-container-lowest py-40">
+<div class="max-w-[1440px] mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+<div>
+<img alt="Modern architecture hallway" class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Minimalist architectural view of a high-end corporate hallway with sharp lines, deep shadows, and professional crimson accent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa2nlsUOOjfaWnQWOZpCdwKo8RHx_DOjmWkSYIwZhJKJgEOGGgp6QoeNL9De3AxbpuhhjZ51bhaWpF4rOyj5ACNZ2ob78ov7LoZRGMxrOSCdZ3RZ3tyg8OZZ3pkAV1tPYGp_BKuSfZhHCHo8oKv2v3Vd4JPf44OfoakU3QWaPVvF9vAOq4hVLth3VBpvI-rlrGZe0YJ00Ne6j6uCzzoJEUu2kIhE-q2gGlH1jsvhRqR5Zem9jmphFIPJWBPWAT1OupXb5AwRe8DmY"/>
+</div>
+<div class="space-y-12">
+<div class="crimson-indicator inline-block">
+<span class="text-sm font-bold tracking-[0.3em] uppercase">Philosophy</span>
+</div>
+<h2 class="text-5xl font-black leading-tight tracking-tighter">Immunity isn't a state. <br/>It's a process.</h2>
+<div class="space-y-8 text-on-surface-variant text-lg leading-[1.8]">
+<p>We believe that modern enterprise networks should behave like living organisms. They must sense threats, adapt to changing loads, and heal themselves without manual intervention.</p>
+<p>Our approach integrates rigorous engineering with predictive AI, creating a defensive posture that moves as fast as your business does.</p>
+</div>
+<div class="pt-8">
+<button class="border border-outline-variant px-8 py-4 text-sm font-bold hover:bg-on-surface hover:text-background transition-all duration-300">
+                                View Our Methodology
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-40 px-8">
+<div class="max-w-[1440px] mx-auto text-center">
+<div class="max-w-4xl mx-auto border-t border-outline-variant/20 pt-32">
+<h2 class="text-6xl md:text-8xl font-black mb-16 tracking-tighter italic">Ready for <span class="text-primary-container">Immunity</span>?</h2>
+<p class="text-xl text-on-surface-variant mb-16 max-w-2xl mx-auto font-medium">Connect with our systems architects to design your enterprise backbone.</p>
+<div class="inline-flex flex-col md:flex-row gap-6">
+<input class="bg-transparent border-0 border-b border-outline text-2xl py-4 px-0 w-80 focus:ring-0 focus:border-primary transition-all" placeholder="Corporate Email Address" type="email"/>
+<button class="bg-primary text-on-primary-fixed px-12 py-5 font-black uppercase tracking-widest hover:scale-[1.05] transition-transform">
+                            Initialize
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-24 px-8 mt-32 bg-surface-container-lowest dark:bg-[#0e0e0e]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-16 max-w-[1440px] mx-auto items-start">
+<div class="col-span-1 md:col-span-1">
+<div class="text-2xl font-black tracking-[-0.04em] text-[#e5e2e1] mb-8">Immunity Networks</div>
+<p class="font-['Plus_Jakarta_Sans'] text-on-surface-variant text-sm leading-[1.8] max-w-xs">
+                    Engineering secure, high-performance foundations for the modern global enterprise.
+                </p>
+</div>
+<div class="flex flex-col space-y-4">
+<span class="text-xs font-bold uppercase tracking-[0.2em] text-[#770026] dark:text-[#ffb2ba] mb-4">Solutions</span>
+<a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Security Architecture</a>
+<a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Managed Services</a>
+</div>
+<div class="flex flex-col space-y-4">
+<span class="text-xs font-bold uppercase tracking-[0.2em] text-[#770026] dark:text-[#ffb2ba] mb-4">Company</span>
+<a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Press Kit</a>
+<a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">About Us</a>
+</div>
+<div class="flex flex-col space-y-4">
+<span class="text-xs font-bold uppercase tracking-[0.2em] text-[#770026] dark:text-[#ffb2ba] mb-4">Legal</span>
+<a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Privacy Policy</a>
+<a class="text-[#debfc1] hover:underline decoration-[#770026] underline-offset-8 transition-all duration-300" href="#">Terms of Service</a>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto mt-24 pt-12 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center text-xs font-medium tracking-wider text-on-surface-variant">
+<span>© 2024 Immunity Networks. All rights reserved.</span>
+<div class="flex space-x-8 mt-6 md:mt-0">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="language">language</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="terminal">terminal</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="verified_user">verified_user</span>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IMMUNITY NETWORKS | BRUTALIST DEFENSE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                animation: {
+                    'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    'glow': 'glow 2s ease-in-out infinite alternate',
+                },
+                keyframes: {
+                    glow: {
+                        '0%': { boxShadow: '0 0 5px var(--deep-crimson)' },
+                        '100%': { boxShadow: '0 0 20px var(--deep-crimson), 0 0 30px var(--bright-crimson)' }
+                    }
+                }
+            }
+        }
+    }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --matte-black: #080808;
+            --deep-crimson: #990011;
+            --bright-crimson: #E6001A;
+            --grid-line: #1F1F1F;
+            --text-muted: #888888;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--matte-black);
+            color: #FFFFFF;
+            overflow-x: hidden;
+            position: relative;
+        }
+        #cursor-glow {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background: #E6001A;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            box-shadow: 0 0 15px #E6001A, 0 0 30px #E6001A, 0 0 50px #990011, 0 0 80px #990011;
+            display: block;
+            margin-left: -15px;
+            margin-top: -15px;
+        }
+        #cursor-glow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: transparent;
+            border: 2px solid #E6001A;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-ring 1.5s ease-out infinite;
+        }
+        @keyframes pulse-ring {
+            0% { width: 30px; height: 30px; opacity: 1; }
+            100% { width: 150px; height: 150px; opacity: 0; }
+        }
+        #cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--bright-crimson);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            box-shadow: 0 0 6px var(--bright-crimson);
+        }
+        .brutalist-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+        }
+        .crimson-overlay {
+            background: linear-gradient(45deg, rgba(153, 0, 17, 0.4) 0%, rgba(8, 8, 8, 0) 100%);
+            mix-blend-mode: multiply;
+        }
+        .sharp-divider {
+            border: 1px solid var(--grid-line);
+        }
+        .command-title {
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 0.85;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        .btn-brutalist {
+            transition: all 0.2s ease;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        .btn-brutalist:hover {
+            background-color: var(--bright-crimson);
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px rgba(153, 0, 17, 0.3);
+        }
+    </style>
+</head>
+<body class="selection:bg-[var(--deep-crimson)] selection:text-white">
+<div id="cursor-glow" style="position: fixed; left: -100px; top: -100px;"></div>
+<header class="fixed top-0 w-full z-[100] border-b border-[var(--grid-line)] bg-[var(--matte-black)]/95 backdrop-blur-md">
+<div class="max-w-[1800px] mx-auto px-8 md:px-12 h-20 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 bg-[var(--deep-crimson)] flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl animate-pulse">shield_lock</span>
+</div>
+<span class="font-extrabold text-xl tracking-tighter uppercase">Immunity <span class="text-[var(--deep-crimson)]">Networks</span></span>
+</div>
+<nav class="hidden lg:flex gap-12">
+<a class="text-xs font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors" href="#">Operations</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors" href="#">Architecture</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors" href="#">Intelligence</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors" href="#">Tactical</a>
+</nav>
+<div class="flex items-center gap-8">
+<span class="hidden sm:block text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest">System Status: Optimal</span>
+<button id="portal-btn" class="bg-[var(--deep-crimson)] text-white px-6 py-2 text-xs font-extrabold uppercase tracking-widest hover:bg-[var(--bright-crimson)] transition-all">Portal Access</button>
+</div>
+</div>
+</header>
+<main>
+<section class="min-h-screen relative flex flex-col items-center justify-center pt-20 border-b border-[var(--grid-line)] brutalist-grid overflow-hidden">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-20">
+<div class="absolute inset-0 bg-radial-gradient(from 50% 50%, var(--deep-crimson) 0%, transparent 70%)"></div>
+</div>
+<div class="relative z-10 text-center px-6">
+<span class="inline-block border border-[var(--deep-crimson)] text-[var(--bright-crimson)] px-4 py-1 text-[10px] font-extrabold uppercase tracking-[0.5em] mb-12">Defending Sovereign Infrastructure</span>
+<h1 class="command-title text-7xl md:text-9xl lg:text-[12rem] font-extrabold mb-12">
+                    IMMUNITY <br/>
+<span class="text-[var(--deep-crimson)]">IS MANDATORY</span>
+</h1>
+<p class="max-w-2xl mx-auto text-[var(--text-muted)] text-lg md:text-xl font-light leading-relaxed mb-16">
+                    Zero-latency defense protocols for critical digital assets. Hardened architecture engineered for the next generation of global cyber warfare.
+                </p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+<button id="init-protocol" class="btn-brutalist bg-[var(--deep-crimson)] text-white px-12 py-6 text-sm font-extrabold uppercase tracking-widest">
+                        Initialize Protocol
+                    </button>
+<button id="view-dossier" class="border border-[var(--grid-line)] hover:border-[var(--deep-crimson)] px-12 py-6 text-sm font-extrabold uppercase tracking-widest transition-all">
+                        View Dossier
+                    </button>
+</div>
+</div>
+<div class="absolute bottom-12 left-12 hidden xl:block">
+<div class="flex flex-col gap-4 text-[var(--text-muted)] font-mono text-[10px]">
+<div class="flex items-center gap-3"><span class="w-2 h-2 bg-[var(--deep-crimson)]"></span> LATITUDE: 47.3769° N</div>
+<div class="flex items-center gap-3"><span class="w-2 h-2 bg-[var(--grid-line)]"></span> LONGITUDE: 8.5417° E</div>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-2 lg:grid-cols-4 border-b border-[var(--grid-line)]">
+<div class="p-12 md:p-20 border-r border-[var(--grid-line)] flex flex-col justify-between aspect-square lg:aspect-auto">
+<span class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest">Success Rate</span>
+<div>
+<h3 class="text-5xl md:text-7xl font-extrabold">99.9%</h3>
+<div class="w-12 h-1 bg-[var(--deep-crimson)] mt-4"></div>
+</div>
+</div>
+<div class="p-12 md:p-20 border-r lg:border-r border-[var(--grid-line)] flex flex-col justify-between">
+<span class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest">Latency</span>
+<div>
+<h3 class="text-5xl md:text-7xl font-extrabold">12MS</h3>
+<div class="w-12 h-1 bg-[var(--grid-line)] mt-4"></div>
+</div>
+</div>
+<div class="p-12 md:p-20 border-r border-[var(--grid-line)] flex flex-col justify-between">
+<span class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest">Nodes</span>
+<div>
+<h3 class="text-5xl md:text-7xl font-extrabold">500+</h3>
+<div class="w-12 h-1 bg-[var(--deep-crimson)] mt-4"></div>
+</div>
+</div>
+<div class="p-12 md:p-20 flex flex-col justify-between">
+<span class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest">Vigilance</span>
+<div>
+<h3 class="text-5xl md:text-7xl font-extrabold">24/7</h3>
+<div class="w-12 h-1 bg-[var(--grid-line)] mt-4"></div>
+</div>
+</div>
+</section>
+<section class="bg-[var(--matte-black)]">
+<div class="grid grid-cols-1 lg:grid-cols-2 border-b border-[var(--grid-line)]">
+<div class="p-12 md:p-24 flex flex-col justify-center border-r border-[var(--grid-line)]">
+<h2 class="command-title text-6xl md:text-8xl font-extrabold mb-8">Defensive<br/><span class="text-[var(--deep-crimson)]">Ecosystem</span></h2>
+<p class="text-[var(--text-muted)] text-xl font-light max-w-lg mb-12 leading-relaxed">
+                        Precision engineering applied to cyber infrastructure. Each module operates in total autonomy or synchronized command.
+                    </p>
+<a id="deploy-system" class="text-[var(--bright-crimson)] font-bold text-xs uppercase tracking-widest flex items-center gap-4 group cursor-pointer" href="#">
+                        Deploy System Protocols
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-2">arrow_right_alt</span>
+</a>
+</div>
+<div class="bg-[var(--deep-crimson)] p-12 md:p-24 flex flex-col justify-end text-white">
+<span class="material-symbols-outlined text-8xl mb-12 opacity-40">shield_lock</span>
+<h3 class="text-4xl font-extrabold uppercase tracking-tight mb-6">Sovereign Sentinel</h3>
+<p class="text-lg font-light leading-relaxed mb-12 opacity-90">
+                        High-tier predictive analysis engine identifying zero-day threats through deep neural pattern recognition before they reach the edge.
+                    </p>
+<div class="pt-8 border-t border-white/20">
+<span class="font-mono text-xs uppercase tracking-widest opacity-60">Status: Operational // Zone A1</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3">
+<div class="p-12 border-r border-b md:border-b-0 border-[var(--grid-line)] hover:bg-[#111111] transition-colors cursor-pointer group">
+<div class="w-12 h-12 bg-[var(--grid-line)] mb-12 group-hover:bg-[var(--deep-crimson)] transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-white">hub</span>
+</div>
+<h4 class="text-2xl font-extrabold uppercase mb-4">Nexus Core</h4>
+<p class="text-[var(--text-muted)] text-sm font-light leading-relaxed">Central command for globally distributed networks. Real-time visualization of all tactical nodes.</p>
+</div>
+<div class="p-12 border-r border-b md:border-b-0 border-[var(--grid-line)] hover:bg-[#111111] transition-colors cursor-pointer group">
+<div class="w-12 h-12 bg-[var(--grid-line)] mb-12 group-hover:bg-[var(--deep-crimson)] transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-white">key</span>
+</div>
+<h4 class="text-2xl font-extrabold uppercase mb-4">Flux Crypt</h4>
+<p class="text-[var(--text-muted)] text-sm font-light leading-relaxed">Dynamic encryption key rotation synced to network heartbeats. Post-quantum cryptographic standards.</p>
+</div>
+<div class="p-12 border-b md:border-b-0 border-[var(--grid-line)] hover:bg-[#111111] transition-colors cursor-pointer group">
+<div class="w-12 h-12 bg-[var(--grid-line)] mb-12 group-hover:bg-[var(--deep-crimson)] transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-white">visibility_off</span>
+</div>
+<h4 class="text-2xl font-extrabold uppercase mb-4">Ghost Path</h4>
+<p class="text-[var(--text-muted)] text-sm font-light leading-relaxed">Invisible tunneling for high-value asset communication. No signature, no trace, no interception.</p>
+</div>
+</div>
+</section>
+<section class="border-t border-[var(--grid-line)]">
+<div class="grid grid-cols-1 lg:grid-cols-2">
+<div class="relative h-[600px] border-r border-[var(--grid-line)] overflow-hidden">
+<img alt="Secure Facility" class="w-full h-full object-cover grayscale brightness-50 contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe_EDCUp6QqKg7mk4o4Gp-GD5oi6KUJV7WYtHBaS8SpcQh5ftxLwBxYlraaSYjcb1x54uBFz_3fHMiOfnZ_tKmZUUHduNkNYRHdSQZWo9RWiuJ3t3wnXinQhPx5po-xf1hLKrFwtCkbnLJDhq_GZxIVwB-uKvZV81TPeUwsbrJm2_W-WdYymKR-95wP9qqI_do8r1S_SMl-Gvvuro7P7p4XkDXZI6N8inSxPVBNluFvd7Cggo6e3OtoBkEybPLRvaD5IasQJ51KIw"/>
+<div class="absolute inset-0 crimson-overlay"></div>
+<div class="absolute inset-0 p-12 flex flex-col justify-between">
+<span class="bg-[var(--deep-crimson)] text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest w-fit">Case: 08-Finance</span>
+<div>
+<h3 class="text-4xl font-extrabold uppercase mb-4">The Global Vault</h3>
+<p class="text-sm font-mono uppercase tracking-widest text-white/70">European Central Bank / Defense Protocol Deployment</p>
+</div>
+</div>
+</div>
+<div class="relative h-[600px] overflow-hidden">
+<img alt="Network Grid" class="w-full h-full object-cover grayscale brightness-50 contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzkBYfRLD-XDA1LQpD1qWER-C2iIsv43KXXsv5ffY7A-9Mkh0fA1K1EyAla4akvQJI6JOjElREQw_ZiTo5bPciG0Jzy4wP0xpwgpk4kbmFzYH48AfGkM3EXbsc1z2GDSARL4SxUBMyY2zMaqLB7vcaEGaUN-yZqh1_d_B4SQ0IN9P9wFwu-MW7njn0jyyEOGWqJ_lMe5Xn3ksuDKWV3iJih6nlFHPOEqTU6q26ym8oXTIa1Ie8w0-u0D530FNC3kfRLRTiULTxpLI"/>
+<div class="absolute inset-0 bg-black/60 mix-blend-multiply"></div>
+<div class="absolute inset-0 p-12 flex flex-col justify-between">
+<span class="border border-white/30 text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest w-fit">Case: 12-Energy</span>
+<div>
+<h3 class="text-4xl font-extrabold uppercase mb-4">Continental Grid</h3>
+<p class="text-sm font-mono uppercase tracking-widest text-white/70">Critical Power Distribution Hardening</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-[var(--matte-black)] border-y border-[var(--grid-line)]">
+<div class="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+<div class="lg:col-span-4 p-12 md:p-24 border-r border-[var(--grid-line)]">
+<h2 class="command-title text-5xl font-extrabold mb-12">TACTICAL<br/><span class="text-[var(--deep-crimson)]">EXPERTISE</span></h2>
+<ul class="space-y-8">
+<li class="flex items-center gap-6">
+<span class="w-3 h-3 bg-[var(--deep-crimson)]"></span>
+<span class="text-xs font-bold uppercase tracking-[0.3em]">Quantum Readiness</span>
+</li>
+<li class="flex items-center gap-6">
+<span class="w-3 h-3 bg-[var(--grid-line)]"></span>
+<span class="text-xs font-bold uppercase tracking-[0.3em]">Forensic Integrity</span>
+</li>
+<li class="flex items-center gap-6">
+<span class="w-3 h-3 bg-[var(--deep-crimson)]"></span>
+<span class="text-xs font-bold uppercase tracking-[0.3em]">Neural Scanning</span>
+</li>
+</ul>
+</div>
+<div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2">
+<div class="p-12 md:p-20 border-r border-b border-[var(--grid-line)]">
+<span class="font-mono text-[var(--deep-crimson)] text-xs mb-6 block">REQ_01</span>
+<h4 class="text-2xl font-extrabold uppercase mb-6">Threat Intelligence</h4>
+<p class="text-[var(--text-muted)] font-light leading-relaxed">Aggressive harvesting of adversary behavioral data to build preemptive defense postures before attack initialization.</p>
+</div>
+<div class="p-12 md:p-20 border-b border-[var(--grid-line)]">
+<span class="font-mono text-[var(--deep-crimson)] text-xs mb-6 block">REQ_02</span>
+<h4 class="text-2xl font-extrabold uppercase mb-6">Auto Remediation</h4>
+<p class="text-[var(--text-muted)] font-light leading-relaxed">Self-healing infrastructures that detect lateral movement and isolate nodes in sub-millisecond cycles without human intervention.</p>
+</div>
+<div class="p-12 md:p-20 border-r border-[var(--grid-line)] md:border-b-0">
+<span class="font-mono text-[var(--deep-crimson)] text-xs mb-6 block">REQ_03</span>
+<h4 class="text-2xl font-extrabold uppercase mb-6">Hardened Edge</h4>
+<p class="text-[var(--text-muted)] font-light leading-relaxed">Computing power deployed at the absolute network perimeter, eliminating vulnerabilities inherent in centralized data loops.</p>
+</div>
+<div class="p-12 md:p-20">
+<span class="font-mono text-[var(--deep-crimson)] text-xs mb-6 block">REQ_04</span>
+<h4 class="text-2xl font-extrabold uppercase mb-6">Sovereign Identity</h4>
+<p class="text-[var(--text-muted)] font-light leading-relaxed">Behavioral-based multi-layered authentication that adapts to real-time environment threat levels and user posture.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="p-12 md:p-32 text-center brutalist-grid border-b border-[var(--grid-line)]">
+<div class="max-w-4xl mx-auto">
+<span class="material-symbols-outlined text-[var(--deep-crimson)] text-6xl mb-12">format_quote</span>
+<h2 class="text-3xl md:text-5xl font-extrabold uppercase leading-tight mb-16 italic">
+                    "Immunity Networks has redefined what we thought was possible in digital resilience. They are the <span class="text-[var(--deep-crimson)]">only partner</span> we trust with our most sensitive intelligence assets."
+                </h2>
+<div class="inline-block pt-12 border-t-4 border-[var(--deep-crimson)]">
+<p class="text-xl font-extrabold uppercase tracking-widest mb-2">Director of Intelligence</p>
+<p class="text-xs font-mono text-[var(--text-muted)] uppercase tracking-[0.2em]">Confidential Government Agency</p>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 lg:grid-cols-2">
+<div class="p-12 md:p-24 border-r border-[var(--grid-line)]">
+<h2 class="command-title text-6xl md:text-7xl font-extrabold mb-12">SECURE <br/><span class="text-[var(--deep-crimson)]">DIALOGUE</span></h2>
+<p class="text-[var(--text-muted)] text-xl font-light mb-16 leading-relaxed">
+                    For inquiries regarding sovereign-grade infrastructure defense, please initiate a request via encrypted channels.
+                </p>
+<div class="space-y-8 font-mono text-sm uppercase tracking-widest">
+<div class="flex items-center gap-6">
+<span class="text-[var(--deep-crimson)]">LOC:</span>
+<span>Zurich, Switzerland [HQ]</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-[var(--deep-crimson)]">PGP:</span>
+<span>0xFD29B4A8E2...</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-[var(--deep-crimson)]">TEL:</span>
+<span>+41 (0) 44 211 44 55</span>
+</div>
+</div>
+</div>
+<div class="p-12 md:p-24 bg-[var(--grid-line)]/20">
+<form id="contact-form" class="space-y-12">
+<div class="relative">
+<label class="text-[10px] font-extrabold uppercase tracking-[0.3em] text-[var(--text-muted)] mb-4 block">Identification</label>
+<input class="w-full bg-transparent border-0 border-b-2 border-[var(--grid-line)] focus:ring-0 focus:border-[var(--deep-crimson)] py-4 text-white uppercase font-bold placeholder:text-white/20 transition-all" placeholder="FULL NAME / AGENCY" type="text"/>
+</div>
+<div class="relative">
+<label class="text-[10px] font-extrabold uppercase tracking-[0.3em] text-[var(--text-muted)] mb-4 block">Secure Endpoint</label>
+<input class="w-full bg-transparent border-0 border-b-2 border-[var(--grid-line)] focus:ring-0 focus:border-[var(--deep-crimson)] py-4 text-white uppercase font-bold placeholder:text-white/20 transition-all" placeholder="EMAIL@AGENCY.SEC" type="email"/>
+</div>
+<div class="relative">
+<label class="text-[10px] font-extrabold uppercase tracking-[0.3em] text-[var(--text-muted)] mb-4 block">Defense Scope</label>
+<textarea class="w-full bg-transparent border-0 border-b-2 border-[var(--grid-line)] focus:ring-0 focus:border-[var(--deep-crimson)] py-4 text-white uppercase font-bold placeholder:text-white/20 transition-all" placeholder="BRIEF OVERVIEW OF OPERATIONAL REQUIREMENTS" rows="4"></textarea>
+</div>
+<button id="submit-form" class="w-full bg-white text-[var(--matte-black)] hover:bg-[var(--deep-crimson)] hover:text-white py-8 text-sm font-extrabold uppercase tracking-[0.4em] transition-all">
+                        Initialize Secure Link
+                    </button>
+</form>
+</div>
+</section>
+</main>
+<footer class="bg-[var(--matte-black)] border-t border-[var(--grid-line)] p-12 md:p-24">
+<div class="max-w-[1800px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+<div class="lg:col-span-2">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-6 h-6 bg-[var(--deep-crimson)]"></div>
+<span class="font-extrabold text-xl tracking-tighter uppercase">Immunity Networks</span>
+</div>
+<p class="max-w-md text-[var(--text-muted)] font-light leading-relaxed mb-12">
+                    Sovereign digital defense for critical infrastructure. Engineering precision in an era of asymmetric warfare.
+                </p>
+<p class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">© 2024 Immunity Networks // ALL RIGHTS RESERVED</p>
+</div>
+<div>
+<h5 class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-white mb-8">Navigation</h5>
+<ul class="space-y-4 text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Tactical Modules</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Arch Intelligence</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Command Port</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Global Node Map</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-white mb-8">Compliance</h5>
+<ul class="space-y-4 text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Privacy Protocol</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Terms of Op</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Secure Disclosure</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">PGP Public Key</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+    // Portal Access Modal
+    const portalBtn = document.getElementById('portal-btn');
+    const initProtocol = document.getElementById('init-protocol');
+    const viewDossier = document.getElementById('view-dossier');
+    const deploySystem = document.getElementById('deploy-system');
+    const contactForm = document.getElementById('contact-form');
+    const submitForm = document.getElementById('submit-form');
+
+    // Create modal overlay
+    const modalOverlay = document.createElement('div');
+    modalOverlay.className = 'fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] hidden items-center justify-center';
+    modalOverlay.innerHTML = `
+        <div id="modal-content" class="bg-[#080808] border border-[var(--grid-line)] p-8 md:p-12 max-w-md w-full mx-4 transform scale-95 opacity-0 transition-all duration-300" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);">
+            <div id="modal-body"></div>
+        </div>
+    `;
+    document.body.appendChild(modalOverlay);
+
+    const modalContent = document.getElementById('modal-content');
+    const modalBody = document.getElementById('modal-body');
+
+    function showModal(content) {
+        modalBody.innerHTML = content;
+        modalOverlay.classList.remove('hidden');
+        modalOverlay.classList.add('flex');
+        setTimeout(() => {
+            modalContent.style.transform = 'translate(-50%, -50%) scale(1)';
+            modalContent.style.opacity = '1';
+        }, 10);
+    }
+
+    function hideModal() {
+        modalContent.style.transform = 'translate(-50%, -50%) scale(0.95)';
+        modalContent.style.opacity = '0';
+        setTimeout(() => {
+            modalOverlay.classList.add('hidden');
+            modalOverlay.classList.remove('flex');
+        }, 300);
+    }
+
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) hideModal();
+    });
+
+    // Portal Access
+    portalBtn.addEventListener('click', () => {
+        showModal(`
+            <div class="text-center">
+                <span class="material-symbols-outlined text-[var(--deep-crimson)] text-5xl mb-6">shield_lock</span>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">Portal Authentication</h3>
+                <p class="text-[var(--text-muted)] text-sm mb-8">Enter your secure credentials to access the command portal.</p>
+                <form id="portal-form" class="space-y-6">
+                    <input type="text" placeholder="OPERATOR ID" class="w-full bg-[#111] border border-[var(--grid-line)] px-4 py-3 text-sm uppercase tracking-widest focus:border-[var(--deep-crimson)] outline-none transition-colors" required>
+                    <input type="password" placeholder="ACCESS CODE" class="w-full bg-[#111] border border-[var(--grid-line)] px-4 py-3 text-sm uppercase tracking-widest focus:border-[var(--deep-crimson)] outline-none transition-colors" required>
+                    <button type="submit" class="w-full bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-6 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Authenticate</button>
+                </form>
+                <button id="close-portal" class="mt-4 text-[var(--text-muted)] text-xs uppercase tracking-widest hover:text-white transition-colors">Cancel</button>
+            </div>
+        `);
+        document.getElementById('portal-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showModal(`
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-green-500 text-5xl mb-6">check_circle</span>
+                    <h3 class="text-2xl font-extrabold uppercase mb-4">Access Granted</h3>
+                    <p class="text-[var(--text-muted)] text-sm mb-8">Welcome back, Operator. Redirecting to command center...</p>
+                </div>
+            `);
+            setTimeout(hideModal, 2000);
+        });
+        document.getElementById('close-portal').addEventListener('click', hideModal);
+    });
+
+    // Initialize Protocol
+    initProtocol.addEventListener('click', () => {
+        showModal(`
+            <div class="text-center">
+                <div class="w-16 h-16 border-4 border-[var(--deep-crimson)] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">Initializing Protocol</h3>
+                <p class="text-[var(--text-muted)] text-sm mb-8">Deploying defensive countermeasures across all nodes...</p>
+                <div id="progress-bar" class="w-full bg-[#111] h-2 mb-4">
+                    <div id="progress-fill" class="bg-[var(--deep-crimson)] h-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <p id="progress-text" class="font-mono text-xs text-[var(--deep-crimson)]">0% Complete</p>
+            </div>
+        `);
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 10;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = progress + '% Complete';
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    showModal(`
+                        <div class="text-center">
+                            <span class="material-symbols-outlined text-green-500 text-5xl mb-6">verified</span>
+                            <h3 class="text-2xl font-extrabold uppercase mb-4">Protocol Active</h3>
+                            <p class="text-[var(--text-muted)] text-sm mb-8">All systems operational. Network is secured.</p>
+                            <button id="close-protocol" class="bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-8 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Acknowledge</button>
+                        </div>
+                    `);
+                    document.getElementById('close-protocol').addEventListener('click', hideModal);
+                }, 500);
+            }
+        }, 200);
+    });
+
+    // View Dossier
+    viewDossier.addEventListener('click', () => {
+        showModal(`
+            <div>
+                <h3 class="text-2xl font-extrabold uppercase mb-6 flex items-center gap-3">
+                    <span class="material-symbols-outlined text-[var(--deep-crimson)]">folder_open</span>
+                    Classified Dossier
+                </h3>
+                <div class="space-y-4 max-h-96 overflow-y-auto">
+                    <div class="bg-[#111] border border-[var(--grid-line)] p-4">
+                        <h4 class="text-sm font-bold uppercase text-[var(--deep-crimson)] mb-2">Operation: Shadow Wall</h4>
+                        <p class="text-xs text-[var(--text-muted)]">Classification: TOP SECRET</p>
+                        <p class="text-xs text-[var(--text-muted)] mt-2">Deployed multi-layered defense grid across Eastern European financial sector. Neutralized 847 intrusion attempts in 72 hours.</p>
+                    </div>
+                    <div class="bg-[#111] border border-[var(--grid-line)] p-4">
+                        <h4 class="text-sm font-bold uppercase text-[var(--deep-crimson)] mb-2">Operation: Iron Veil</h4>
+                        <p class="text-xs text-[var(--text-muted)]">Classification: RESTRICTED</p>
+                        <p class="text-xs text-[var(--text-muted)] mt-2">Hardened critical energy infrastructure against state-sponsored APT groups. Zero breaches recorded over 18 months.</p>
+                    </div>
+                    <div class="bg-[#111] border border-[var(--grid-line)] p-4">
+                        <h4 class="text-sm font-bold uppercase text-[var(--deep-crimson)] mb-2">Operation: Ghost Protocol</h4>
+                        <p class="text-xs text-[var(--text-muted)]">Classification: CONFIDENTIAL</p>
+                        <p class="text-xs text-[var(--text-muted)] mt-2">Implemented undetectable communication channels for diplomatic entities. Complete operational secrecy maintained.</p>
+                    </div>
+                </div>
+                <button id="close-dossier" class="mt-6 w-full border border-[var(--grid-line)] hover:border-[var(--deep-crimson)] px-6 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Close Archive</button>
+            </div>
+        `);
+        document.getElementById('close-dossier').addEventListener('click', hideModal);
+    });
+
+    // Deploy System Protocols
+    deploySystem.addEventListener('click', (e) => {
+        e.preventDefault();
+        showModal(`
+            <div class="text-center">
+                <span class="material-symbols-outlined text-[var(--deep-crimson)] text-5xl mb-6">hub</span>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">System Deployment</h3>
+                <p class="text-[var(--text-muted)] text-sm mb-8">Select modules to deploy:</p>
+                <div class="space-y-3">
+                    <label class="flex items-center gap-3 bg-[#111] border border-[var(--grid-line)] p-3 cursor-pointer hover:border-[var(--deep-crimson)] transition-colors">
+                        <input type="checkbox" checked class="w-4 h-4 accent-[var(--deep-crimson)]">
+                        <span class="text-sm font-bold uppercase">Nexus Core</span>
+                    </label>
+                    <label class="flex items-center gap-3 bg-[#111] border border-[var(--grid-line)] p-3 cursor-pointer hover:border-[var(--deep-crimson)] transition-colors">
+                        <input type="checkbox" checked class="w-4 h-4 accent-[var(--deep-crimson)]">
+                        <span class="text-sm font-bold uppercase">Flux Crypt</span>
+                    </label>
+                    <label class="flex items-center gap-3 bg-[#111] border border-[var(--grid-line)] p-3 cursor-pointer hover:border-[var(--deep-crimson)] transition-colors">
+                        <input type="checkbox" checked class="w-4 h-4 accent-[var(--deep-crimson)]">
+                        <span class="text-sm font-bold uppercase">Ghost Path</span>
+                    </label>
+                </div>
+                <button id="confirm-deploy" class="mt-6 w-full bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-6 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Deploy Selected</button>
+            </div>
+        `);
+        document.getElementById('confirm-deploy').addEventListener('click', () => {
+            showModal(`
+                <div class="text-center">
+                    <div class="w-16 h-16 border-4 border-[var(--deep-crimson)] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                    <h3 class="text-2xl font-extrabold uppercase mb-4">Deploying...</h3>
+                    <p class="text-[var(--text-muted)] text-sm">Modules are being initialized across the network.</p>
+                </div>
+            `);
+            setTimeout(() => {
+                showModal(`
+                    <div class="text-center">
+                        <span class="material-symbols-outlined text-green-500 text-5xl mb-6">check_circle</span>
+                        <h3 class="text-2xl font-extrabold uppercase mb-4">Deployment Complete</h3>
+                        <p class="text-[var(--text-muted)] text-sm mb-8">All selected modules are now operational.</p>
+                        <button id="close-deploy" class="bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-8 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Confirm</button>
+                    </div>
+                `);
+                document.getElementById('close-deploy').addEventListener('click', hideModal);
+            }, 2000);
+        });
+    });
+
+    // Contact Form
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        const values = {};
+        inputs.forEach(input => {
+            values[input.placeholder] = input.value;
+        });
+        
+        showModal(`
+            <div class="text-center">
+                <div class="w-16 h-16 border-4 border-[var(--deep-crimson)] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">Transmitting...</h3>
+                <p class="text-[var(--text-muted)] text-sm">Encrypting and sending via secure channels.</p>
+            </div>
+        `);
+        setTimeout(() => {
+            showModal(`
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-green-500 text-5xl mb-6">lock_clock</span>
+                    <h3 class="text-2xl font-extrabold uppercase mb-4">Transmission Complete</h3>
+                    <p class="text-[var(--text-muted)] text-sm mb-8">Your request has been received. Expect encrypted response within 24 hours.</p>
+                    <button id="close-contact" class="bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-8 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Close</button>
+                </div>
+            `);
+            document.getElementById('close-contact').addEventListener('click', hideModal);
+            contactForm.reset();
+        }, 1500);
+    });
+        
+        showModal(`
+            <div class="text-center">
+                <div class="w-16 h-16 border-4 border-[var(--deep-crimson)] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">Transmitting...</h3>
+                <p class="text-[var(--text-muted)] text-sm">Encrypting and sending via secure channels.</p>
+            </div>
+        `);
+        setTimeout(() => {
+            showModal(`
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-green-500 text-5xl mb-6">lock_clock</span>
+                    <h3 class="text-2xl font-extrabold uppercase mb-4">Transmission Complete</h3>
+                    <p class="text-[var(--text-muted)] text-sm mb-8">Your request has been received. Expect encrypted response within 24 hours.</p>
+                    <button id="close-contact" class="bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-8 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Close</button>
+                </div>
+            `);
+            document.getElementById('close-contact').addEventListener('click', hideModal);
+            contactForm.reset();
+        }, 1500);
+// End of contact form handler
+
+    // Add smooth scroll for navigation
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const text = link.textContent.toLowerCase();
+            const sections = {
+                'operations': 0,
+                'architecture': 1,
+                'intelligence': 2,
+                'tactical': 3
+            };
+            if (sections[text] !== undefined) {
+                const sectionIndex = sections[text];
+                const allSections = document.querySelectorAll('main section');
+                if (allSections[sectionIndex]) {
+                    allSections[sectionIndex].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    // Add scroll reveal animation
+    const revealElements = document.querySelectorAll('section:not(:first-of-type)');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        revealObserver.observe(element);
+    });
+
+    // Add counter animation for stats
+    function animateCounter(element, target, suffix = '') {
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current) + suffix;
+        }, 30);
+    }
+
+    // Intersection Observer for stats animation
+    const statsSection = document.querySelectorAll('section')[1];
+    if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statValues = entry.target.querySelectorAll('h3');
+                    statValues.forEach(stat => {
+                        const text = stat.textContent;
+                        if (text.includes('99.9')) {
+                            animateCounter(stat, 99.9, '%');
+                        } else if (text.includes('12')) {
+                            animateCounter(stat, 12, 'MS');
+                        } else if (text.includes('500')) {
+                            animateCounter(stat, 500, '+');
+                        } else if (text.includes('24')) {
+                            animateCounter(stat, 24, '/7');
+                        }
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(statsSection);
+    }
+
+    // Add typing effect to hero subtitle
+    const heroSubtitle = document.querySelector('section:first-of-type p');
+    if (heroSubtitle) {
+        const originalText = heroSubtitle.textContent;
+        heroSubtitle.textContent = '';
+        let charIndex = 0;
+        
+        function typeText() {
+            if (charIndex < originalText.length) {
+                heroSubtitle.textContent += originalText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeText, 20);
+            }
+        }
+        
+        setTimeout(typeText, 500);
+    }
+
+    // Add pulse effect to status indicator
+    const statusIndicator = document.querySelector('.hidden.sm\\\\:block');
+    if (statusIndicator) {
+        statusIndicator.classList.add('animate-pulse');
+    }
+
+    // Add mobile menu toggle
+    const menuBtn = document.createElement('button');
+    menuBtn.id = 'menu-btn';
+    menuBtn.className = 'lg:hidden text-white';
+    menuBtn.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+    
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+    
+    if (header && nav) {
+        const portalBtnEl = document.getElementById('portal-btn');
+        if (portalBtnEl && portalBtnEl.parentElement) {
+            portalBtnEl.parentElement.insertBefore(menuBtn, portalBtnEl);
+        }
+        
+        const mobileMenu = document.createElement('div');
+        mobileMenu.id = 'mobile-menu';
+        mobileMenu.className = 'fixed inset-0 bg-[var(--matte-black)] z-[90] hidden flex-col items-center justify-center gap-8';
+        mobileMenu.innerHTML = `
+            <a class="text-xl font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors mobile-link" href="#">Operations</a>
+            <a class="text-xl font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors mobile-link" href="#">Architecture</a>
+            <a class="text-xl font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors mobile-link" href="#">Intelligence</a>
+            <a class="text-xl font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors mobile-link" href="#">Tactical</a>
+            <button id="close-menu" class="absolute top-8 right-8 text-white">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        `;
+        document.body.appendChild(mobileMenu);
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
+        });
+        
+        document.getElementById('close-menu').addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        });
+        
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+    }
+
+    // Mouse follow effect - instant follow
+    const cursorGlow = document.getElementById('cursor-glow');
+    cursorGlow.style.opacity = '0';
+    cursorGlow.style.transition = 'opacity 0.2s ease';
+    
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+        cursorGlow.style.opacity = '1';
+    });
+    
+    // Hide custom cursor on touch devices
+    if ('ontouchstart' in window) {
+        cursorGlow.style.display = 'none';
+    }
+</script>
+
+</body></html>
