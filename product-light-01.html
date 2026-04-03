@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#1a1c1c",
+                    "surface": "#f9f9f9",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#e2e2e4",
+                    "on-primary-fixed": "#400010",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-tertiary-fixed-variant": "#454749",
+                    "surface-variant": "#e2e2e2",
+                    "primary-fixed-dim": "#ffb2ba",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#1a1c1d",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-bright": "#f9f9f9",
+                    "surface-dim": "#dadada",
+                    "surface-container-low": "#f3f3f3",
+                    "outline": "#8b7173",
+                    "surface-tint": "#ac2f49",
+                    "secondary": "#5f5e5e",
+                    "surface-container": "#eeeeee",
+                    "on-surface-variant": "#574143",
+                    "tertiary-fixed-dim": "#c6c6c8",
+                    "secondary-container": "#e2dfde",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#ffd9dc",
+                    "surface-container-highest": "#e2e2e2",
+                    "background": "#f9f9f9",
+                    "primary": "#4f0016",
+                    "outline-variant": "#debfc1",
+                    "on-secondary-container": "#636262",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-primary-container": "#ff778b",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-container": "#a1a2a4",
+                    "inverse-surface": "#2f3131",
+                    "on-background": "#1a1c1c",
+                    "tertiary": "#222425",
+                    "tertiary-container": "#37393b",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#770026",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#8b1533",
+                    "inverse-primary": "#ffb2ba",
+                    "surface-container-high": "#e8e8e8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .security-pulse {
+            position: relative;
+        }
+        .security-pulse::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #770026;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(.3); opacity: 0.8; }
+            80%, 100% { opacity: 0; transform: scale(2.5); }
+        }
+        .editorial-gradient {
+            background: linear-gradient(45deg, #4f0016 0%, #770026 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 dark:bg-stone-900/70 backdrop-blur-2xl border-b border-stone-200/20 dark:border-stone-800/20 shadow-[0_20px_50px_rgba(26,28,28,0.05)]">
+<div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto font-['Plus_Jakarta_Sans'] tracking-tight">
+<div class="text-xl font-light tracking-[-0.02em] text-stone-900 dark:text-white">
+                IMMUNITY
+            </div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="text-rose-900 dark:text-rose-400 border-b-2 border-rose-900 pb-1" href="#">Protocols</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 transition-colors" href="#">Network</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 transition-colors" href="#">Threats</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 transition-colors" href="#">Analytics</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-stone-500 hover:opacity-80 transition-all duration-300">notifications_active</button>
+<button class="bg-primary-container text-on-primary px-6 py-2.5 rounded-xl editorial-gradient hover:opacity-90 transition-all text-sm font-medium">
+                    Secure Access
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section: Editorial Storytelling -->
+<section class="px-12 py-24 min-h-[819px] flex flex-col justify-center max-w-[1920px] mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-5">
+<span class="label-md uppercase tracking-[0.2em] text-primary-container font-semibold mb-6 block">Product Showcase</span>
+<h1 class="text-[3.5rem] leading-[1.1] font-light tracking-[-0.03em] mb-8">
+                        L2 NetForce: <br/>
+<span class="font-bold text-on-surface">Sovereign Hardware.</span>
+</h1>
+<p class="body-lg text-secondary leading-relaxed mb-10 max-w-md">
+                        Beyond simple encryption. NetForce is an architectural evolution in Layer-2 security, providing a physically isolated environment for global data flow.
+                    </p>
+<div class="flex gap-6 items-center">
+<button class="px-8 py-4 editorial-gradient text-white rounded-xl font-semibold shadow-lg hover:scale-[1.02] transition-transform">Deploy Protocol</button>
+<button class="px-8 py-4 bg-surface-container-high text-on-surface rounded-xl font-semibold hover:bg-surface-container transition-colors">Technical PDF</button>
+</div>
+</div>
+<div class="lg:col-span-7 relative">
+<div class="rounded-3xl overflow-hidden aspect-video bg-surface-container-high shadow-2xl group">
+<img alt="close-up of sleek professional rack-mounted network security hardware with soft crimson accent lighting in a minimalist data center" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="sleek professional rack-mounted network security hardware with soft crimson accent lighting in a minimalist data center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB20mrmMxKFja6AGnAavM86Y1bZYSy6uRNjnTqJk5yAn9SmFfHvoyx2vTe5ghY5tWgl-Os_Sv6Qi2dC7S-L3HAJCD3p8ysPyjfJEyu85B5XvlWsivVeqlmcQcrLaHt-n3UnvwvAxczZc-tDna8hYg5lPl769yzoR8RBAXBIkJCMxrDvFnEfV2DYDREHZu2P4lul_K17HvSuK-L8gy8TCUBWPWStUCz45T-PHVqd4gzl2vWNSztZYdFTTzpvNChe4STW5RQBpZON478"/>
+</div>
+<!-- Floating Pulse Element -->
+<div class="absolute -bottom-8 -left-8 bg-surface-container-lowest p-8 rounded-2xl shadow-xl border border-outline-variant/10 max-w-xs">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-3 h-3 rounded-full bg-primary-container security-pulse"></div>
+<span class="label-md uppercase tracking-widest text-primary-container font-bold">Status: Active</span>
+</div>
+<p class="text-sm text-secondary">Monitoring 12.4 Tbps across global sovereign nodes with zero detected latency leakage.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Comparison: Legacy vs NetForce -->
+<section class="bg-surface-container-low py-32 px-12">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-24">
+<h2 class="text-4xl font-semibold tracking-tight mb-4 text-on-surface">The Evolutionary Gap</h2>
+<p class="text-stone-500 max-w-xl mx-auto uppercase tracking-widest text-xs font-bold">NetForce vs Traditional Layer-2 Infrastructure</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-outline-variant/20 rounded-3xl overflow-hidden">
+<!-- Legacy Column -->
+<div class="bg-surface p-12 lg:p-16">
+<h3 class="text-2xl font-light mb-12 flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-400">history</span>
+                            Legacy Networks
+                        </h3>
+<ul class="space-y-12">
+<li class="flex flex-col gap-2">
+<span class="label-md text-stone-400 font-bold uppercase tracking-widest">Authentication</span>
+<p class="text-lg text-secondary">Software-defined, vulnerable to credential theft and packet sniffing.</p>
+</li>
+<li class="flex flex-col gap-2">
+<span class="label-md text-stone-400 font-bold uppercase tracking-widest">Latency</span>
+<p class="text-lg text-secondary">Significant overhead due to recursive encryption-decryption cycles.</p>
+</li>
+<li class="flex flex-col gap-2">
+<span class="label-md text-stone-400 font-bold uppercase tracking-widest">Visibility</span>
+<p class="text-lg text-secondary">Black-box operational models with limited forensic traceability.</p>
+</li>
+</ul>
+</div>
+<!-- NetForce Column -->
+<div class="bg-surface-container-lowest p-12 lg:p-16 border-l border-primary-container/10">
+<h3 class="text-2xl font-bold mb-12 flex items-center gap-3 text-primary-container">
+<span class="material-symbols-outlined">security</span>
+                            NetForce Architecture
+                        </h3>
+<ul class="space-y-12">
+<li class="flex flex-col gap-2">
+<span class="label-md text-primary-container font-bold uppercase tracking-widest">Sovereign Auth</span>
+<p class="text-lg font-medium">Hardware-level physical identity verification with zero-trust handshake.</p>
+</li>
+<li class="flex flex-col gap-2">
+<span class="label-md text-primary-container font-bold uppercase tracking-widest">Throughput</span>
+<p class="text-lg font-medium">Wire-speed 400Gbps processing with sub-microsecond latency injection.</p>
+</li>
+<li class="flex flex-col gap-2">
+<span class="label-md text-primary-container font-bold uppercase tracking-widest">Observability</span>
+<p class="text-lg font-medium">Granular real-time telemetry with AI-driven threat prediction.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Sovereign Protection Benefits -->
+<section class="py-32 px-12 max-w-[1920px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+<div class="max-w-2xl">
+<h2 class="text-4xl font-light leading-tight mb-4">Total Control over the <span class="font-bold">Infostructure.</span></h2>
+<p class="text-secondary text-lg">Our hardware doesn't just block threats; it creates a new paradigm of secure connectivity.</p>
+</div>
+<div class="pb-2">
+<span class="text-7xl font-extrabold text-surface-container-high">001</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 min-h-[600px]">
+<div class="md:col-span-2 md:row-span-2 bg-surface-container-low rounded-3xl p-12 flex flex-col justify-between group overflow-hidden relative">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary-container text-4xl mb-6">shield_with_heart</span>
+<h3 class="text-2xl font-bold mb-4">Quantum-Ready Secrecy</h3>
+<p class="text-secondary max-w-sm">Embedded post-quantum cryptographic modules ensure your network is shielded from future decryption threats.</p>
+</div>
+<img alt="abstract visualization of flowing digital data streams with crystalline structures and deep red light refractions" class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-500" data-alt="abstract visualization of flowing digital data streams with crystalline structures and deep red light refractions" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVe6JxWbKuO53ddacaAPEtOyJYUWbiA8zK9KDyY0wpnE_nRhQTQ61L8glouqNPvRcFNGVUEgL9Yi7C61oHhbaVXbsbuY11P3tLhYqi4vfI5v7Tm2VIvhchU2AGb8yZz-woOwIn92rPmhDEvUvwKBnXMZ3nR6n-RVLKwgoHn-DjcMhHRGYqXJvwYtw2f69v7VNTcHuBEkkyUyGYh6DD8iFjF-LzSwXCxdBFIMKc79B0DsHn0HHHLRppZbYRcW0Vw5zvwZAZ6Z4_LN8"/>
+</div>
+<div class="md:col-span-2 bg-surface-container-highest rounded-3xl p-10 flex flex-col justify-center">
+<div class="flex items-center gap-8">
+<div class="p-6 bg-surface-container-lowest rounded-2xl shadow-sm">
+<span class="material-symbols-outlined text-3xl text-on-surface">hub</span>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-2">Global Mesh Connectivity</h3>
+<p class="text-stone-500 text-sm">Seamlessly bridge disparate geographic locations into a single, secure private backbone.</p>
+</div>
+</div>
+</div>
+<div class="bg-primary-container rounded-3xl p-10 text-white flex flex-col justify-between editorial-gradient">
+<span class="material-symbols-outlined text-4xl">bolt</span>
+<div>
+<h3 class="text-3xl font-bold mb-1">99.999%</h3>
+<p class="text-rose-200/70 text-xs uppercase tracking-widest">Uptime Guarantee</p>
+</div>
+</div>
+<div class="bg-on-surface rounded-3xl p-10 text-white flex flex-col justify-between">
+<span class="material-symbols-outlined text-4xl text-rose-500">memory</span>
+<div>
+<h3 class="text-xl font-bold mb-2">Immunity Chipset</h3>
+<p class="text-stone-400 text-xs uppercase tracking-widest">Custom Silicon Architecture</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Specs Table (Minimalist Luxe) -->
+<section class="py-32 px-12 bg-white">
+<div class="max-w-4xl mx-auto">
+<div class="mb-16 border-l-4 border-primary-container pl-8">
+<h2 class="text-3xl font-bold tracking-tight">Technical Specifications</h2>
+<p class="text-secondary mt-2">Precision engineered for the most demanding enterprise environments.</p>
+</div>
+<div class="space-y-8">
+<div class="flex justify-between items-center py-6 border-b border-stone-100 group">
+<span class="label-md font-bold text-stone-400 group-hover:text-primary-container transition-colors uppercase tracking-[0.15em]">Throughput Capacity</span>
+<span class="text-lg font-medium text-on-surface">Up to 800 Gbps (Full Duplex)</span>
+</div>
+<div class="flex justify-between items-center py-6 border-b border-stone-100 group">
+<span class="label-md font-bold text-stone-400 group-hover:text-primary-container transition-colors uppercase tracking-[0.15em]">Encryption Standard</span>
+<span class="text-lg font-medium text-on-surface">AES-256-GCM / ChaCha20-Poly1305</span>
+</div>
+<div class="flex justify-between items-center py-6 border-b border-stone-100 group">
+<span class="label-md font-bold text-stone-400 group-hover:text-primary-container transition-colors uppercase tracking-[0.15em]">Maximum Latency</span>
+<span class="text-lg font-medium text-on-surface">&lt; 0.5 Microseconds (Port-to-Port)</span>
+</div>
+<div class="flex justify-between items-center py-6 border-b border-stone-100 group">
+<span class="label-md font-bold text-stone-400 group-hover:text-primary-container transition-colors uppercase tracking-[0.15em]">Physical Interface</span>
+<span class="text-lg font-medium text-on-surface">QSFP28 / SFP28 Optical Support</span>
+</div>
+<div class="flex justify-between items-center py-6 border-b border-stone-100 group">
+<span class="label-md font-bold text-stone-400 group-hover:text-primary-container transition-colors uppercase tracking-[0.15em]">Power Efficiency</span>
+<span class="text-lg font-medium text-on-surface">Eco-Optimized &lt; 150W Nominal</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA: Storytelling Close -->
+<section class="py-32 px-12">
+<div class="max-w-[1920px] mx-auto relative rounded-[3rem] overflow-hidden bg-on-surface p-24 text-center">
+<img alt="wide shot of a clean ultra-modern command center with large data visualization screens and dim architectural lighting" class="absolute inset-0 w-full h-full object-cover opacity-20" data-alt="clean ultra-modern command center with large data visualization screens and dim architectural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNwlsSUPW-h5ShNElmfAznDcxUx5slIHfteEViLCNeUJDy-qDk75KL5VsFeqwYHo-YEHjmqdqtZQXJoUYVQbH13rqpxtxsPoaFEYGPFkuS7VuN6mEblNgUVP49SfUv8MVM6aRcJADkYAeXzhw-MVw6ofgwrlajQRy_x_B-8kB0sg9gDwwmupZhm4M4zFoMDlPllmv4yY0LXHWf5Svu-RQ_rUHNzvNUdxdGOaGzamEoCIQcbijbMPpy3EW-c-RP4QmFlsBCIGg7u-M"/>
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="text-[3rem] font-light text-white leading-tight mb-8">Ready to Secure your <span class="text-primary-container font-bold">Network Sovereignty?</span></h2>
+<p class="text-stone-400 mb-12 text-lg">Connect with our systems architects to design a bespoke L2 NetForce implementation for your infrastructure.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-primary-container px-12 py-5 rounded-2xl font-bold text-white hover:bg-primary transition-colors text-lg">Consult an Expert</button>
+<button class="bg-white/10 backdrop-blur-md px-12 py-5 rounded-2xl font-bold text-white hover:bg-white/20 transition-colors text-lg">View Use Cases</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-20 px-12 bg-stone-100 dark:bg-stone-950">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between items-start w-full gap-12 font-['Plus_Jakarta_Sans'] text-sm tracking-wide">
+<div class="space-y-6">
+<div class="text-lg font-semibold tracking-widest text-rose-900 dark:text-rose-500 uppercase">
+                    IMMUNITY
+                </div>
+<p class="text-stone-500 max-w-xs normal-case">Architecting the future of secure communication for global enterprises and sovereign nations.</p>
+</div>
+<div class="flex gap-16 uppercase font-bold">
+<div class="flex flex-col gap-4">
+<span class="text-stone-400 mb-2 font-black tracking-[0.2em] text-[10px]">RESOURCES</span>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-800 dark:hover:text-rose-300 transition-colors" href="#">Architecture</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-800 dark:hover:text-rose-300 transition-colors" href="#">Privacy Ledger</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-stone-400 mb-2 font-black tracking-[0.2em] text-[10px]">NETWORK</span>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-800 dark:hover:text-rose-300 transition-colors" href="#">Global Nodes</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-800 dark:hover:text-rose-300 transition-colors" href="#">Support</a>
+</div>
+</div>
+<div class="text-stone-500 dark:text-stone-400 max-w-xs text-right lg:text-left">
+                © 2024 Immunity Networks. Sovereign Security Systems.
+            </div>
+</div>
+</footer>
+</body></html>

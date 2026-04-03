@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IMMUNITY | Enterprise Networking Solution</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1a1c1c",
+                        "surface": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#e2e2e4",
+                        "on-primary-fixed": "#400010",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-tertiary-fixed-variant": "#454749",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed-dim": "#ffb2ba",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#1a1c1d",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#f9f9f9",
+                        "surface-dim": "#dadada",
+                        "surface-container-low": "#f3f3f3",
+                        "outline": "#8b7173",
+                        "surface-tint": "#ac2f49",
+                        "secondary": "#5f5e5e",
+                        "surface-container": "#eeeeee",
+                        "on-surface-variant": "#574143",
+                        "tertiary-fixed-dim": "#c6c6c8",
+                        "secondary-container": "#e2dfde",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#ffd9dc",
+                        "surface-container-highest": "#e2e2e2",
+                        "background": "#f9f9f9",
+                        "primary": "#4f0016",
+                        "outline-variant": "#debfc1",
+                        "on-secondary-container": "#636262",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-primary-container": "#ff778b",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-container": "#a1a2a4",
+                        "inverse-surface": "#2f3131",
+                        "on-background": "#1a1c1c",
+                        "tertiary": "#222425",
+                        "tertiary-container": "#37393b",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#770026",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#8b1533",
+                        "inverse-primary": "#ffb2ba",
+                        "surface-container-high": "#e8e8e8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .security-pulse {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .security-pulse::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border: 1px solid #770026;
+            border-radius: 50%;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.33); opacity: 0.8; }
+            80%, 100% { opacity: 0; }
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+        }
+        .text-editorial-display {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        .text-label-caps {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+        .primary-gradient {
+            background: linear-gradient(45deg, #4f0016, #770026);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface overflow-x-hidden">
+<!-- TopNavBar Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 dark:bg-stone-900/70 backdrop-blur-2xl border-b border-stone-200/20 dark:border-stone-800/20 shadow-[0_20px_50px_rgba(26,28,28,0.05)]">
+<div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto font-['Plus_Jakarta_Sans'] tracking-tight">
+<div class="flex items-center gap-12">
+<span class="text-xl font-light tracking-[-0.02em] text-stone-900 dark:text-white">IMMUNITY</span>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 transition-colors" href="#">Network</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 transition-colors" href="#">Threats</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 transition-colors" href="#">Analytics</a>
+<a class="text-rose-900 dark:text-rose-400 border-b-2 border-rose-900 pb-1" href="#">Protocols</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-stone-500 cursor-pointer hover:opacity-80 transition-all duration-300">notifications_active</span>
+<button class="primary-gradient text-white px-6 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-300">Secure Access</button>
+</div>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="px-12 mb-32 grid lg:grid-cols-12 gap-12 items-end">
+<div class="lg:col-span-7">
+<span class="text-label-caps text-primary-container mb-6 block">Sovereign Guardian Framework</span>
+<h1 class="text-editorial-display mb-8">Integrated Solution <br/><span class="italic text-primary-container">Matrix</span></h1>
+<p class="body-lg text-secondary max-w-xl leading-[1.6]">
+                    A unified architecture designed for global enterprises requiring absolute sovereignty. Our networking stack fuses hardware-level encryption with a decentralized distribution model.
+                </p>
+</div>
+<div class="lg:col-span-5 pb-4">
+<div class="flex items-center gap-4 text-sm font-medium text-on-surface-variant">
+<div class="security-pulse"><div class="w-2.5 h-2.5 rounded-full bg-primary-container"></div></div>
+<span>Global Nodes: ACTIVE</span>
+<span class="mx-2 opacity-20">|</span>
+<span>Lat: <span class="font-mono">40.7128° N</span></span>
+</div>
+</div>
+</section>
+<!-- Global Distribution Map Visual -->
+<section class="px-12 mb-32">
+<div class="relative w-full aspect-[21/9] bg-surface-container-high rounded-full overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="Abstract global network map with luminous points of light and digital data streams over a dark blue planetary background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA6NhC2O5kqAKjl6fzrfexjDiqhtQcgz5Br4_ShOjmErM0kE3zU-qSa5RM9g8rpyM-LiWQhFX77n9SIQ8uPaa3h9UYmQYH6uvdA7_oLlcSWwjhbbPOSB_XDPyRWDnuQQQaWt1wEFAbNGYtNjwmPWH0rmGX5pglJcASINvu-JrGwlTB64RqzaysMSkH_6L9HWnbpMbH5EURHKhSP2aRMLTvDMUz3JGDIqDWEgxcthgt4Gcg0eSgF-7JiGuosCEru0ST5fBh3xpUx_g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+<!-- Floating Info Cards -->
+<div class="absolute top-12 left-12 p-8 glass-nav rounded-xl border border-white/20 max-w-xs">
+<span class="text-label-caps text-primary-container mb-2 block">Node Distribution</span>
+<h3 class="text-xl font-semibold mb-4">42 Edge Locations</h3>
+<div class="space-y-3">
+<div class="flex justify-between text-sm"><span class="text-secondary">Latency Peak</span> <span class="font-mono">4ms</span></div>
+<div class="flex justify-between text-sm"><span class="text-secondary">Uptime</span> <span class="font-mono">99.999%</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Sovereign Stack Breakdown -->
+<section class="px-12 mb-32">
+<div class="mb-16">
+<h2 class="text-3xl font-light tracking-tight mb-4">The Sovereign Stack</h2>
+<div class="h-1 w-24 bg-primary-container"></div>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Layer 1 -->
+<div class="bg-surface-container-low p-10 rounded-xl transition-colors hover:bg-surface-container">
+<span class="text-label-caps text-secondary mb-8 block">Layer 01</span>
+<span class="material-symbols-outlined text-4xl text-primary-container mb-6" data-icon="shield_lock">shield_lock</span>
+<h3 class="text-xl font-semibold mb-4">Physical Integrity</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6">Milled-aluminum security appliances with hardware-based root of trust and tamper-evident architecture.</p>
+<ul class="text-xs space-y-2 font-medium uppercase tracking-widest text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-container rounded-full"></span> Secure Enclaves</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-container rounded-full"></span> Quantum-Ready</li>
+</ul>
+</div>
+<!-- Layer 2 -->
+<div class="bg-surface-container-lowest p-10 rounded-xl shadow-[0_20px_50px_rgba(26,28,28,0.05)] border border-surface-container-high">
+<span class="text-label-caps text-primary-container mb-8 block">Layer 02</span>
+<span class="material-symbols-outlined text-4xl text-primary-container mb-6" data-icon="hub">hub</span>
+<h3 class="text-xl font-semibold mb-4">Wireguard+ Protocol</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6">Our proprietary refinement of Wireguard, optimized for massive horizontal scaling without performance decay.</p>
+<ul class="text-xs space-y-2 font-medium uppercase tracking-widest text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-container rounded-full"></span> Zero-Config Handshake</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-container rounded-full"></span> Noise-Protocol v2</li>
+</ul>
+</div>
+<!-- Layer 3 -->
+<div class="bg-surface-container-low p-10 rounded-xl transition-colors hover:bg-surface-container">
+<span class="text-label-caps text-secondary mb-8 block">Layer 03</span>
+<span class="material-symbols-outlined text-4xl text-primary-container mb-6" data-icon="encrypted">encrypted</span>
+<h3 class="text-xl font-semibold mb-4">AES-256 GCM</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6">Government-grade encryption for every packet. Every node operates as an independent cryptographic island.</p>
+<ul class="text-xs space-y-2 font-medium uppercase tracking-widest text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-container rounded-full"></span> Ephemeral Keys</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-container rounded-full"></span> Poly1305 Auth</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Technical Infrastructure Visual -->
+<section class="px-12 mb-32 grid lg:grid-cols-2 gap-20 items-center">
+<div class="relative rounded-full overflow-hidden aspect-square max-w-lg mx-auto lg:mx-0">
+<img class="w-full h-full object-cover" data-alt="Hyper-modern data center with glowing red accent lights reflecting on brushed metal server racks in a clean minimalist environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhnqKe24K--yQbvh92hnjKdV2vLbkotBntrgkjWxw1QZm8iS03FdzEgAInWkcMVy0pJow0UReVENQyrHkfW2QGsdZ7IaEg1kypm8JMEZUkh-pWQOkqA4kjEOkgfQ-hq0DMdUyeBLT6AjHem0v_Zc5yoVFjs0lCXJde_QLmo4of19CFRp8PNbhzA_uQMno-hPqyIE40KwK9WkqxP2I1KkX1ae2Zo7ldKZwVJ4qoVRW4Js3NcaUxaC4QfP61RFczqOG80PnBPmIavIQ"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+</div>
+<div>
+<span class="text-label-caps text-primary-container mb-6 block">Infrastructure Sovereignty</span>
+<h2 class="text-4xl font-light mb-8">Hardware-Software <br/>Harmonization</h2>
+<div class="space-y-12">
+<div class="flex gap-6">
+<span class="text-2xl font-light text-primary-container">01.</span>
+<div>
+<h4 class="font-semibold mb-2">Dedicated Silicon</h4>
+<p class="text-secondary text-sm">We don't use off-the-shelf NICs. Our custom silicon handles encryption at the gate level, ensuring zero CPU overhead for security tasks.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<span class="text-2xl font-light text-primary-container">02.</span>
+<div>
+<h4 class="font-semibold mb-2">No-Logs Architecture</h4>
+<p class="text-secondary text-sm">The OS runs entirely in RAM. On shutdown or power-loss, all state is purged. Permanent storage is used only for encrypted boot signatures.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<span class="text-2xl font-light text-primary-container">03.</span>
+<div>
+<h4 class="font-semibold mb-2">Global Mesh Routing</h4>
+<p class="text-secondary text-sm">Dynamic path optimization avoids congested public backbones, favoring our private fiber nodes for enterprise traffic.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="px-12 mb-32">
+<div class="bg-primary-container rounded-xl p-20 text-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+</div>
+<div class="relative z-10">
+<span class="text-label-caps text-white/60 mb-6 block">Future-Proof Your Network</span>
+<h2 class="text-white text-5xl font-light mb-10">Request a System Audit</h2>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-white text-primary-container px-10 py-4 rounded-xl font-semibold hover:bg-surface transition-colors">Speak with an Architect</button>
+<button class="border border-white/30 text-white px-10 py-4 rounded-xl font-semibold hover:bg-white/10 transition-colors uppercase tracking-widest text-xs">Technical Docs</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Navigation Shell -->
+<footer class="w-full py-20 px-12 bg-stone-100 dark:bg-stone-950">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between items-start w-full">
+<div class="mb-12 lg:mb-0">
+<span class="text-lg font-semibold tracking-widest text-rose-900 dark:text-rose-500 uppercase block mb-4">IMMUNITY</span>
+<p class="text-stone-500 dark:text-stone-400 font-['Plus_Jakarta_Sans'] text-sm max-w-xs leading-relaxed">
+                    Sovereign Security Systems for the modern enterprise. Built on the principles of absolute integrity.
+                </p>
+</div>
+<div class="grid grid-cols-2 gap-12 sm:gap-24">
+<div class="flex flex-col gap-4">
+<span class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide uppercase text-rose-900 dark:text-rose-400 font-bold">Solutions</span>
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide uppercase text-stone-500 dark:text-stone-400 hover:text-rose-800 dark:hover:text-rose-300 transition-colors" href="#">Architecture</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide uppercase text-stone-500 dark:text-stone-400 hover:text-rose-800 dark:hover:text-rose-300 transition-colors" href="#">Privacy Ledger</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide uppercase text-rose-900 dark:text-rose-400 font-bold">Company</span>
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide uppercase text-stone-500 dark:text-stone-400 hover:text-rose-800 dark:hover:text-rose-300 transition-colors" href="#">Global Nodes</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide uppercase text-stone-500 dark:text-stone-400 hover:text-rose-800 dark:hover:text-rose-300 transition-colors" href="#">Support</a>
+</div>
+</div>
+</div>
+<div class="mt-20 pt-10 border-t border-stone-200 dark:border-stone-800 flex flex-col md:flex-row justify-between gap-6">
+<span class="text-stone-500 dark:text-stone-400 font-['Plus_Jakarta_Sans'] text-sm tracking-wide uppercase">© 2024 Immunity Networks. Sovereign Security Systems.</span>
+<div class="flex gap-8">
+<a class="material-symbols-outlined text-stone-400 hover:text-rose-900 transition-colors" data-icon="public" href="#">public</a>
+<a class="material-symbols-outlined text-stone-400 hover:text-rose-900 transition-colors" data-icon="terminal" href="#">terminal</a>
+<a class="material-symbols-outlined text-stone-400 hover:text-rose-900 transition-colors" data-icon="shield" href="#">shield</a>
+</div>
+</div>
+</footer>
+</body></html>
