@@ -1,745 +1,805 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Immunity Networks – Intelligent Network Ecosystems</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --red-deep:   #330010;
-    --red-main:   #780126;
-    --red-mid:    #97002f;
-    --red-soft:   #b8003a;
-    --red-pale:   #f5e6eb;
-    --red-muted:  #fdf0f3;
-    --dark-1:     #222A2F;
-    --dark-2:     #272727;
-    --dark-3:     #1a1f23;
-    --dark-4:     #2e3640;
-    --gray-50:    #F8F9FA;
-    --gray-100:   #F1F3F5;
-    --gray-200:   #E5E8EC;
-    --gray-400:   #9AA3AD;
-    --gray-500:   #6B7685;
-    --gray-600:   #4A5568;
-    --white:      #ffffff;
-    --font-head:  'Montserrat', sans-serif;
-    --font-body:  'Roboto', sans-serif;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--font-body); color: var(--dark-2); background: var(--white); line-height: 1.6; overflow-x: hidden; }
-  img { max-width: 100%; display: block; }
-  a { text-decoration: none; }
-
-  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
-
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--font-head); font-size: 11px; font-weight: 700;
-    color: var(--red-main); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 14px;
-  }
-  .eyebrow::before { content: ''; width: 22px; height: 2px; background: var(--red-main); border-radius: 2px; }
-  .eyebrow.light { color: #f5a0b5; }
-  .eyebrow.light::before { background: var(--red-soft); }
-
-  .h2 {
-    font-family: var(--font-head); font-size: clamp(26px,3.5vw,40px); font-weight: 800;
-    line-height: 1.18; color: var(--dark-2); letter-spacing: -0.5px;
-  }
-  .h2 span { color: var(--red-main); }
-  .h2.light { color: white; }
-  .h2.light span { color: var(--red-soft); }
-
-  .body-text { font-family: var(--font-body); font-size: 15px; color: var(--gray-500); line-height: 1.75; font-weight: 300; max-width: 540px; margin-top: 12px; }
-  .body-text.light { color: rgba(255,255,255,0.5); }
-
-  /* ── TOP BAR ── */
-  .topbar { background: var(--red-deep); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .topbar .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .topbar-group { display: flex; gap: 24px; flex-wrap: wrap; }
-  .topbar-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.6); }
-  .topbar-item svg { width: 13px; height: 13px; flex-shrink: 0; }
-  .topbar-item a { color: rgba(255,255,255,0.6); transition: color 0.18s; }
-  .topbar-item a:hover { color: white; }
-
-  /* ── NAV ── */
-  nav { position: sticky; top: 0; z-index: 200; background: var(--dark-1); height: 68px; display: flex; align-items: center; box-shadow: 0 2px 20px rgba(0,0,0,0.35); }
-  .nav-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-  .nav-logo { display: flex; align-items: center; gap: 12px; }
-  .nav-icon { width: 38px; height: 38px; background: var(--red-main); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 14px; font-weight: 800; color: white; flex-shrink: 0; letter-spacing: -0.5px; }
-  .nav-name { font-family: var(--font-head); font-size: 16px; font-weight: 700; color: white; }
-  .nav-sub { font-family: var(--font-body); font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.35); letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-top: 1px; }
-  .nav-links { display: flex; list-style: none; gap: 2px; flex: 1; justify-content: center; }
-  .nav-links a { font-family: var(--font-head); font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.68); padding: 8px 13px; border-radius: 6px; letter-spacing: 0.3px; transition: all 0.18s; }
-  .nav-links a:hover { color: white; background: rgba(255,255,255,0.07); }
-  .nav-ctas { display: flex; gap: 10px; flex-shrink: 0; }
-  .btn-ng { font-family: var(--font-head); font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.78); border: 1px solid rgba(255,255,255,0.18); padding: 9px 18px; border-radius: 6px; transition: all 0.18s; }
-  .btn-ng:hover { border-color: rgba(255,255,255,0.45); color: white; }
-  .btn-ns { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: white; background: var(--red-main); padding: 9px 20px; border-radius: 6px; transition: background 0.18s; }
-  .btn-ns:hover { background: var(--red-mid); }
-
-  /* ── HERO ── */
-  .hero { background: var(--dark-3); position: relative; overflow: hidden; min-height: calc(100vh - 108px); display: flex; align-items: center; padding: 72px 0; }
-  .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 30px 30px; }
-  .hero-glow1 { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(120,1,38,0.22) 0%, transparent 65%); top: -200px; right: -100px; pointer-events: none; }
-  .hero-glow2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(51,0,16,0.35) 0%, transparent 70%); bottom: -80px; left: 15%; pointer-events: none; }
-
-  .hero-inner { position: relative; z-index: 1; max-width: 1160px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-
-  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(120,1,38,0.28); border: 1px solid rgba(151,0,47,0.4); padding: 6px 14px; border-radius: 100px; font-family: var(--font-head); font-size: 11px; font-weight: 700; color: #f5a0b5; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px; }
-  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red-soft); animation: blink 2s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
-
-  .hero h1 { font-family: var(--font-head); font-size: clamp(34px,4.5vw,54px); font-weight: 800; line-height: 1.1; color: white; letter-spacing: -1px; margin-bottom: 20px; }
-  .hero h1 .hl { color: var(--red-soft); display: block; }
-  .hero h1 .sub { font-weight: 400; font-size: 0.68em; color: rgba(255,255,255,0.42); display: block; letter-spacing: 0; margin-top: 8px; }
-
-  .hero-p { font-family: var(--font-body); font-size: 15px; color: rgba(255,255,255,0.48); line-height: 1.8; font-weight: 300; margin-bottom: 34px; max-width: 460px; }
-
-  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
-
-  .btn-prim { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: white; background: var(--red-main); padding: 13px 26px; border-radius: 8px; letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 7px; transition: all 0.2s; border: none; cursor: pointer; }
-  .btn-prim:hover { background: var(--red-mid); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(120,1,38,0.35); }
-  .btn-ghost2 { font-family: var(--font-head); font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.72); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.13); padding: 13px 26px; border-radius: 8px; display: inline-flex; align-items: center; gap: 7px; transition: all 0.2s; cursor: pointer; }
-  .btn-ghost2:hover { color: white; background: rgba(255,255,255,0.09); }
-
-  .hero-stats { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.03); }
-  .hstat { padding: 20px 22px; border-right: 1px solid rgba(255,255,255,0.07); }
-  .hstat:last-child { border-right: none; }
-  .hstat-v { font-family: var(--font-head); font-size: 28px; font-weight: 800; color: white; line-height: 1; }
-  .hstat-v em { color: var(--red-soft); font-style: normal; }
-  .hstat-l { font-family: var(--font-body); font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.38); margin-top: 5px; }
-
-  /* Hero visual */
-  .hero-vis { display: flex; align-items: center; justify-content: center; }
-  .vis { width: 420px; height: 420px; position: relative; flex-shrink: 0; }
-  .vring { position: absolute; border-radius: 50%; border: 1px solid rgba(120,1,38,0.22); }
-  .vr1 { inset: 0; animation: cw 26s linear infinite; }
-  .vr2 { inset: 52px; border-color: rgba(151,0,47,0.16); animation: ccw 19s linear infinite; }
-  .vr3 { inset: 104px; border-color: rgba(120,1,38,0.1); animation: cw 13s linear infinite; }
-  @keyframes cw { to { transform: rotate(360deg); } }
-  @keyframes ccw { to { transform: rotate(-360deg); } }
-  .vcenter { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .vcore { width: 108px; height: 108px; background: linear-gradient(135deg, var(--red-main), var(--red-deep)); border-radius: 22px; border: 1.5px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 60px rgba(120,1,38,0.5), 0 0 120px rgba(120,1,38,0.18); }
-  .vnode { position: absolute; width: 42px; height: 42px; background: var(--dark-4); border: 1.5px solid rgba(120,1,38,0.38); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.45); }
-  .vnode svg { width: 17px; height: 17px; color: #f5a0b5; }
-  .vn-t { top: 5%; left: 50%; transform: translateX(-50%); }
-  .vn-r { top: 50%; right: 5%; transform: translateY(-50%); }
-  .vn-b { bottom: 5%; left: 50%; transform: translateX(-50%); }
-  .vn-l { top: 50%; left: 5%; transform: translateY(-50%); }
-  .vn-tr { top: 18%; right: 14%; }
-  .vn-br { bottom: 18%; right: 14%; }
-  .vn-bl { bottom: 18%; left: 14%; }
-  .vn-tl { top: 18%; left: 14%; }
-
-  /* ── TRUST BAR ── */
-  .trust-bar { background: var(--gray-50); border-bottom: 1px solid var(--gray-200); padding: 22px 0; }
-  .trust-inner { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; justify-content: center; }
-  .tlbl { font-family: var(--font-body); font-size: 11px; font-weight: 500; color: var(--gray-400); letter-spacing: 2px; text-transform: uppercase; white-space: nowrap; }
-  .tsep { width: 1px; height: 24px; background: var(--gray-200); flex-shrink: 0; }
-  .tlogos { display: flex; gap: 32px; flex-wrap: wrap; align-items: center; justify-content: center; }
-  .tlogo { font-family: var(--font-head); font-size: 12px; font-weight: 700; color: var(--gray-400); letter-spacing: 0.5px; transition: color 0.18s; }
-  .tlogo:hover { color: var(--red-main); }
-
-  /* sections */
-  section { padding: 88px 0; }
-
-  /* ── SOLUTIONS ── */
-  .solutions { background: white; }
-  .sol-hdr { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 52px; flex-wrap: wrap; }
-  .btn-ored { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--red-main); border: 1.5px solid var(--red-main); padding: 11px 22px; border-radius: 7px; letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 7px; transition: all 0.2s; flex-shrink: 0; }
-  .btn-ored:hover { background: var(--red-main); color: white; }
-
-  .sol-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-  .sol-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 14px; padding: 28px; position: relative; overflow: hidden; transition: all 0.22s; display: block; color: inherit; }
-  .sol-card:hover { background: white; border-color: var(--red-main); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(120,1,38,0.1); }
-  .sol-card:hover .sarrow { color: var(--red-main); transform: translate(3px,-3px); }
-  .sol-card:hover .sico { background: var(--red-pale); border-color: rgba(120,1,38,0.22); }
-  .sol-card:hover .sico svg { color: var(--red-main); }
-  .sol-card.hero-c { background: var(--red-deep); border-color: var(--red-main); grid-row: span 2; }
-  .sol-card.hero-c:hover { background: #3d0013; }
-  .sol-card.hero-c .stitle { color: white; }
-  .sol-card.hero-c .sdesc { color: rgba(255,255,255,0.48); }
-  .sol-card.hero-c .sarrow { color: rgba(255,255,255,0.2); }
-  .sol-card.hero-c:hover .sarrow { color: rgba(255,255,255,0.75); }
-  .sol-card.hero-c .sico { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); }
-  .sol-card.hero-c .sico svg { color: #f5a0b5; }
-  .sol-card.hero-c .stag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
-  .sico { width: 48px; height: 48px; background: var(--red-pale); border: 1px solid rgba(120,1,38,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: all 0.2s; }
-  .sico svg { width: 22px; height: 22px; color: var(--red-main); }
-  .stitle { font-family: var(--font-head); font-size: 16px; font-weight: 700; color: var(--dark-2); margin-bottom: 8px; }
-  .sdesc { font-family: var(--font-body); font-size: 13.5px; color: var(--gray-500); line-height: 1.65; font-weight: 300; }
-  .sarrow { position: absolute; top: 22px; right: 22px; font-size: 18px; color: var(--gray-200); transition: all 0.2s; }
-  .stag { display: inline-block; margin-top: 18px; font-family: var(--font-head); font-size: 10px; font-weight: 700; background: var(--red-pale); color: var(--red-main); padding: 4px 10px; border-radius: 100px; letter-spacing: 1px; text-transform: uppercase; }
-
-  /* ── PRODUCTS ── */
-  .products { background: var(--gray-50); }
-  .prod-hdr { margin-bottom: 44px; }
-  .prod-tabs { display: flex; background: var(--gray-200); border-radius: 10px; overflow: hidden; width: fit-content; margin-bottom: 36px; padding: 3px; gap: 2px; }
-  .ptab { font-family: var(--font-head); font-size: 13px; font-weight: 600; padding: 9px 18px; border: none; background: transparent; color: var(--gray-500); cursor: pointer; border-radius: 8px; transition: all 0.18s; }
-  .ptab.on { background: var(--dark-1); color: white; }
-  .ptab:hover:not(.on) { background: var(--gray-100); color: var(--dark-2); }
-  .prod-show { display: grid; grid-template-columns: 1fr 1fr; background: white; border: 1px solid var(--gray-200); border-radius: 16px; overflow: hidden; min-height: 360px; }
-  .pleft { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
-  .pcat { font-family: var(--font-head); font-size: 11px; font-weight: 700; color: var(--red-main); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-  .pname { font-family: var(--font-head); font-size: 30px; font-weight: 800; color: var(--dark-2); margin-bottom: 12px; letter-spacing: -0.5px; line-height: 1.15; }
-  .pdesc { font-family: var(--font-body); font-size: 14px; color: var(--gray-500); line-height: 1.75; font-weight: 300; margin-bottom: 22px; }
-  .pfeats { list-style: none; margin-bottom: 28px; }
-  .pfeats li { display: flex; align-items: flex-start; gap: 10px; font-family: var(--font-body); font-size: 13.5px; color: var(--gray-600); padding: 4px 0; font-weight: 400; line-height: 1.5; }
-  .pfeats li::before { content: ''; width: 16px; height: 16px; flex-shrink: 0; background: var(--red-pale) url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%23780126' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center; border-radius: 50%; margin-top: 2px; }
-  .pright { background: linear-gradient(145deg, var(--dark-1), var(--dark-3)); display: flex; align-items: center; justify-content: center; padding: 48px; position: relative; overflow: hidden; }
-  .pright::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(120,1,38,0.2) 0%, transparent 65%); }
-  .pright img { position: relative; z-index: 1; max-height: 230px; object-fit: contain; filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5)); transition: transform 0.3s ease, opacity 0.2s ease; }
-  .pright img:hover { transform: scale(1.04) translateY(-4px); }
-  .pbadge { position: absolute; top: 18px; right: 18px; z-index: 2; background: var(--red-main); color: white; font-family: var(--font-head); font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 6px; letter-spacing: 0.5px; }
-
-  /* ── WHY US ── */
-  .why { background: var(--dark-1); position: relative; overflow: hidden; }
-  .why::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 28px 28px; }
-  .why-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(120,1,38,0.16) 0%, transparent 60%); top: -200px; right: -100px; pointer-events: none; }
-  .why-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
-  .wpoints { display: flex; flex-direction: column; gap: 22px; margin-top: 34px; }
-  .wpt { display: flex; gap: 16px; align-items: flex-start; }
-  .wpt-ico { width: 42px; height: 42px; flex-shrink: 0; background: rgba(120,1,38,0.2); border: 1px solid rgba(120,1,38,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-  .wpt-ico svg { width: 18px; height: 18px; color: #f5a0b5; }
-  .wpt-title { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: white; margin-bottom: 3px; }
-  .wpt-desc { font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.6; }
-  .wmetrics { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .wm { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 24px 20px; }
-  .wm.s2 { grid-column: span 2; }
-  .wmv { font-family: var(--font-head); font-size: 36px; font-weight: 800; color: white; line-height: 1; }
-  .wmv em { color: var(--red-soft); font-style: normal; }
-  .wml { font-family: var(--font-body); font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.38); margin-top: 5px; }
-
-  /* ── EXPERTISE ── */
-  .expertise { background: white; }
-  .exp-hdr { text-align: center; margin-bottom: 56px; }
-  .exp-hdr .body-text { margin: 0 auto; }
-  .exp-grid { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--gray-200); border-radius: 16px; overflow: hidden; background: var(--gray-200); gap: 1px; }
-  .ecell { background: white; padding: 30px 26px; transition: background 0.2s; }
-  .ecell:hover { background: var(--red-muted); }
-  .ecell:hover .eico { background: var(--red-pale); border-color: rgba(120,1,38,0.2); }
-  .ecell:hover .eico svg { color: var(--red-main); }
-  .eico { width: 50px; height: 50px; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; transition: all 0.2s; }
-  .eico svg { width: 22px; height: 22px; color: var(--gray-500); transition: color 0.2s; }
-  .etitle { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--dark-2); margin-bottom: 8px; }
-  .edesc { font-family: var(--font-body); font-size: 13.5px; color: var(--gray-500); line-height: 1.65; font-weight: 300; }
-
-  /* ── INDUSTRIES ── */
-  .industries { background: var(--gray-50); }
-  .ind-hdr { margin-bottom: 44px; }
-  .ind-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; }
-  .icard { background: white; border: 1px solid var(--gray-200); border-radius: 12px; padding: 26px 16px; text-align: center; transition: all 0.2s; display: block; }
-  .icard:hover { border-color: var(--red-main); box-shadow: 0 8px 24px rgba(120,1,38,0.09); transform: translateY(-3px); }
-  .icard:hover .iibox { background: var(--red-pale); border-color: rgba(120,1,38,0.2); }
-  .icard:hover .iibox svg { color: var(--red-main); }
-  .iibox { width: 52px; height: 52px; margin: 0 auto 13px; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-  .iibox svg { width: 22px; height: 22px; color: var(--gray-400); transition: color 0.2s; }
-  .iname { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--dark-2); }
-
-  /* ── TESTIMONIALS ── */
-  .testimonials { background: white; }
-  .test-hdr { text-align: center; margin-bottom: 52px; }
-  .test-hdr .body-text { margin: 0 auto; }
-  .tgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-  .tcard { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 14px; padding: 28px; position: relative; transition: border-color 0.2s; }
-  .tcard:hover { border-color: rgba(120,1,38,0.3); }
-  .tqmark { font-family: Georgia,serif; font-size: 64px; line-height: 1; color: var(--red-pale); position: absolute; top: 14px; right: 20px; font-weight: 700; pointer-events: none; }
-  .tstars { display: flex; gap: 2px; margin-bottom: 14px; }
-  .tstars span { color: var(--red-main); font-size: 13px; }
-  .tbody { font-family: var(--font-body); font-size: 13.5px; color: var(--gray-600); line-height: 1.78; font-weight: 300; margin-bottom: 22px; }
-  .tauthor { display: flex; align-items: center; gap: 12px; }
-  .tavatar { width: 40px; height: 40px; border-radius: 50%; background: var(--red-main); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 13px; font-weight: 800; color: white; flex-shrink: 0; }
-  .tname { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--dark-2); }
-  .trole { font-family: var(--font-body); font-size: 11px; color: var(--gray-400); font-weight: 300; margin-top: 2px; }
-
-  /* ── CTA ── */
-  .ctabanner { background: var(--red-main); padding: 72px 0; position: relative; overflow: hidden; text-align: center; }
-  .ctabanner::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 28px 28px; }
-  .ctabanner-glow { position: absolute; width: 600px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(0,0,0,0.22) 0%, transparent 60%); top: -100px; left: 50%; transform: translateX(-50%); pointer-events: none; }
-  .ctainner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; padding: 0 24px; }
-  .ctatitle { font-family: var(--font-head); font-size: clamp(26px,3.5vw,40px); font-weight: 800; color: white; margin-bottom: 14px; letter-spacing: -0.5px; }
-  .ctadesc { font-family: var(--font-body); font-size: 15px; color: rgba(255,255,255,0.62); font-weight: 300; margin-bottom: 36px; line-height: 1.7; }
-  .ctabtns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  .btn-wh { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--red-main); background: white; padding: 13px 26px; border-radius: 8px; display: inline-flex; align-items: center; gap: 7px; transition: all 0.2s; border: none; cursor: pointer; }
-  .btn-wh:hover { background: var(--gray-50); transform: translateY(-2px); }
-  .btn-ow { font-family: var(--font-head); font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.82); border: 1.5px solid rgba(255,255,255,0.35); padding: 13px 26px; border-radius: 8px; display: inline-flex; align-items: center; gap: 7px; transition: all 0.2s; }
-  .btn-ow:hover { border-color: white; color: white; }
-
-  /* ── FOOTER ── */
-  footer { background: var(--dark-3); padding: 60px 0 28px; }
-  .fgrid { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 44px; }
-  .fbdesc { font-family: var(--font-body); font-size: 13.5px; font-weight: 300; color: rgba(255,255,255,0.36); line-height: 1.75; margin: 14px 0 20px; max-width: 280px; }
-  .fci { display: flex; align-items: flex-start; gap: 8px; font-family: var(--font-body); font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,0.36); margin-bottom: 8px; }
-  .fci a { color: rgba(255,255,255,0.36); transition: color 0.18s; }
-  .fci a:hover { color: rgba(255,255,255,0.7); }
-  .fcolhead { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.82); margin-bottom: 18px; letter-spacing: 0.3px; }
-  .flinks { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .flinks a { font-family: var(--font-body); font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.36); transition: color 0.18s; }
-  .flinks a:hover { color: rgba(255,255,255,0.68); }
-  .fbot { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 26px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-  .fcopy { font-family: var(--font-body); font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.28); }
-  .flegal { display: flex; gap: 24px; }
-  .flegal a { font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.24); font-weight: 300; transition: color 0.18s; }
-  .flegal a:hover { color: rgba(255,255,255,0.55); }
-
-  /* ── RESPONSIVE ── */
-  @media(max-width:1024px){
-    .hero-inner{grid-template-columns:1fr;}
-    .hero-vis{display:none;}
-    .sol-grid{grid-template-columns:1fr 1fr;}
-    .sol-card.hero-c{grid-row:span 1;}
-    .why-inner{grid-template-columns:1fr;gap:48px;}
-    .ind-grid{grid-template-columns:repeat(3,1fr);}
-    .fgrid{grid-template-columns:1fr 1fr;}
-  }
-  @media(max-width:768px){
-    section{padding:56px 0;}
-    .sol-grid{grid-template-columns:1fr;}
-    .prod-show{grid-template-columns:1fr;}
-    .pright{min-height:220px;padding:32px;}
-    .exp-grid{grid-template-columns:1fr;}
-    .tgrid{grid-template-columns:1fr;}
-    .ind-grid{grid-template-columns:repeat(2,1fr);}
-    .wmetrics{grid-template-columns:1fr 1fr;}
-    .fgrid{grid-template-columns:1fr;}
-    .nav-links{display:none;}
-    .btn-ng{display:none;}
-    .hero-stats{grid-template-columns:1fr;}
-    .prod-tabs{flex-wrap:wrap;}
-    .topbar .container{justify-content:center;}
-  }
-</style>
-</head>
-<body>
-
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="container">
-    <div class="topbar-group">
-      <div class="topbar-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.2 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
-        <a href="tel:02246041626">(022) 46041626</a>
-      </div>
-      <div class="topbar-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <a href="mailto:contactus@immunitynetworks.com">contactus@immunitynetworks.com</a>
-      </div>
-    </div>
-    <div class="topbar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Mon–Sat: 10:00 AM – 7:00 PM
-    </div>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <div class="nav-icon">IN</div>
-      <div>
-        <div class="nav-name">Immunity Networks</div>
-        <span class="nav-sub">Intelligent Ecosystems</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#solutions">Solutions</a></li>
-      <li><a href="#products">Products</a></li>
-      <li><a href="#industries">Industries</a></li>
-      <li><a href="#expertise">Expertise</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-    <div class="nav-ctas">
-      <a href="tel:02246041626" class="btn-ng">📞 Call Now</a>
-      <a href="#contact" class="btn-ns">Get a Quote</a>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-glow1"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-inner">
-    <div>
-      <div class="hero-badge"><div class="badge-dot"></div>16+ Years of Network Excellence</div>
-      <h1>
-        We Design
-        <span class="hl">Intelligent Networks</span>
-        <span class="sub">Secure · Scalable · Future-Ready</span>
-      </h1>
-      <p class="hero-p">Immunity Networks creates intelligent, secure, and scalable network ecosystems that empower enterprises to achieve seamless connectivity and strong digital resilience.</p>
-      <div class="hero-btns">
-        <a href="#solutions" class="btn-prim">Explore Solutions →</a>
-        <a href="#contact" class="btn-ghost2">Request a Callback</a>
-      </div>
-      <div class="hero-stats">
-        <div class="hstat"><div class="hstat-v">300<em>+</em></div><div class="hstat-l">Enterprise Clients</div></div>
-        <div class="hstat"><div class="hstat-v">5K<em>+</em></div><div class="hstat-l">Networks Deployed</div></div>
-        <div class="hstat"><div class="hstat-v">10M<em>+</em></div><div class="hstat-l">Users Connected</div></div>
-      </div>
-    </div>
-    <div class="hero-vis">
-      <div class="vis">
-        <div class="vring vr1"></div>
-        <div class="vring vr2"></div>
-        <div class="vring vr3"></div>
-        <div class="vnode vn-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <div class="vnode vn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg></div>
-        <div class="vnode vn-b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="vnode vn-l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="1" y="16" width="6" height="6" rx="1"/><rect x="17" y="16" width="6" height="6" rx="1"/><path d="M6 19h12M12 8v8"/></svg></div>
-        <div class="vnode vn-tr" style="opacity:.45;width:32px;height:32px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="9"/></svg></div>
-        <div class="vnode vn-br" style="opacity:.45;width:32px;height:32px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="9"/></svg></div>
-        <div class="vnode vn-bl" style="opacity:.3;width:28px;height:28px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="9"/></svg></div>
-        <div class="vnode vn-tl" style="opacity:.3;width:28px;height:28px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="9"/></svg></div>
-        <div class="vcenter">
-          <div class="vcore">
-            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" width="52" height="52">
-              <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="container">
-    <div class="trust-inner">
-      <span class="tlbl">Trusted by</span>
-      <div class="tsep"></div>
-      <div class="tlogos">
-        <span class="tlogo">JSW STEEL</span>
-        <span class="tlogo">TCS</span>
-        <span class="tlogo">ADANI</span>
-        <span class="tlogo">BHEL</span>
-        <span class="tlogo">IIIT</span>
-        <span class="tlogo">VNIT</span>
-        <span class="tlogo">SADBHAV</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SOLUTIONS -->
-<section class="solutions" id="solutions">
-  <div class="container">
-    <div class="sol-hdr">
-      <div>
-        <span class="eyebrow">What We Offer</span>
-        <h2 class="h2">Solutions for <span>Every Scale</span></h2>
-        <p class="body-text">Comprehensive networking tailored to your industry, security requirements, and growth ambitions.</p>
-      </div>
-      <a href="#contact" class="btn-ored">View All Solutions →</a>
-    </div>
-    <div class="sol-grid">
-      <a href="#" class="sol-card hero-c">
-        <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <div class="stitle">Enterprise Networking</div>
-        <div class="sdesc">Reliable and scalable networking infrastructure for large organisations — built for 99.9% uptime and mission-critical workloads. Designed to grow with your business.</div>
-        <div class="stag">Most Popular</div>
-        <div class="sarrow">↗</div>
-      </a>
-      <a href="#" class="sol-card">
-        <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg></div>
-        <div class="stitle">Rural Connectivity</div>
-        <div class="sdesc">Extend high-speed internet to remote and rural areas with PM-WANI and cost-effective wireless solutions.</div>
-        <div class="sarrow">↗</div>
-      </a>
-      <a href="#" class="sol-card">
-        <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="stitle">Endpoint Security</div>
-        <div class="sdesc">Comprehensive endpoint protection from malware, viruses, and unauthorized access with real-time response.</div>
-        <div class="sarrow">↗</div>
-      </a>
-      <a href="#" class="sol-card">
-        <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-        <div class="stitle">Hotels & Hospitality</div>
-        <div class="sdesc">Guest-facing and operational networks designed for seamless hospitality experiences and high-density usage.</div>
-        <div class="sarrow">↗</div>
-      </a>
-      <a href="#" class="sol-card">
-        <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <div class="stitle">Hospital & Healthcare</div>
-        <div class="sdesc">Secure, high-availability networks for hospitals, clinics, and medical institutions with strict compliance.</div>
-        <div class="sarrow">↗</div>
-      </a>
-      <a href="#" class="sol-card">
-        <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <div class="stitle">Gateway Security</div>
-        <div class="sdesc">Advanced end-to-end threat protection for enterprise network gateways with intrusion prevention.</div>
-        <div class="sarrow">↗</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="products" id="products">
-  <div class="container">
-    <div class="prod-hdr">
-      <span class="eyebrow">Our Hardware</span>
-      <h2 class="h2">Powering Your <span>Network Infrastructure</span></h2>
-    </div>
-    <div class="prod-tabs">
-      <button class="ptab on" onclick="sp(0,this)">L3 Netforce</button>
-      <button class="ptab" onclick="sp(1,this)">L2 Netforce</button>
-      <button class="ptab" onclick="sp(2,this)">LinkOptix</button>
-      <button class="ptab" onclick="sp(3,this)">Gateway Controller</button>
-      <button class="ptab" onclick="sp(4,this)">Lotus Alpha AP</button>
-    </div>
-    <div class="prod-show">
-      <div class="pleft">
-        <div class="pcat" id="pCat">Network Switch</div>
-        <div class="pname" id="pName">L3 Netforce</div>
-        <p class="pdesc" id="pDesc">Our L3 Switch enables fast, intelligent routing across complex environments, ensuring seamless communication between all network segments with enterprise-grade reliability.</p>
-        <ul class="pfeats" id="pFeats">
-          <li>Advanced Layer 3 routing for complex network infrastructures</li>
-          <li>Inter-VLAN routing with superior speed and flexibility</li>
-          <li>Dynamic routing protocols: OSPF, BGP, and RIP</li>
-          <li>Built-in redundancy and failover for high availability</li>
-          <li>ACLs, DHCP snooping, and IP Source Guard security</li>
-        </ul>
-        <a href="#" class="btn-prim">View Full Specifications →</a>
-      </div>
-      <div class="pright">
-        <div class="pbadge" id="pBadge">Enterprise Grade</div>
-        <img id="pImg" src="https://www.immunitynetworks.com/images/l3/L3-netforce.png" alt="Product" onerror="this.style.opacity='0.3'">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY US -->
-<section class="why" id="about">
-  <div class="why-glow"></div>
-  <div class="container">
-    <div class="why-inner">
-      <div>
-        <span class="eyebrow light">Why Choose Us</span>
-        <h2 class="h2 light">Built on <span>Trust</span>,<br>Driven by Innovation</h2>
-        <p class="body-text light">We design enterprise networking that empowers businesses to operate with speed, security, and confidence — from initial consultation to ongoing management.</p>
-        <div class="wpoints">
-          <div class="wpt">
-            <div class="wpt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-            <div><div class="wpt-title">Proven Expertise</div><div class="wpt-desc">16+ years building enterprise-class networking for 300+ clients across India.</div></div>
-          </div>
-          <div class="wpt">
-            <div class="wpt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div><div class="wpt-title">Multi-Layered Security</div><div class="wpt-desc">Advanced zero-trust protection against evolving cyber threats at every layer.</div></div>
-          </div>
-          <div class="wpt">
-            <div class="wpt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
-            <div><div class="wpt-title">Future-Ready Design</div><div class="wpt-desc">Scalable architectures engineered to grow with your business without disruption.</div></div>
-          </div>
-          <div class="wpt">
-            <div class="wpt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-            <div><div class="wpt-title">End-to-End Support</div><div class="wpt-desc">From consultation and deployment to ongoing management — we're always there.</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="wmetrics">
-        <div class="wm"><div class="wmv">16<em>+</em></div><div class="wml">Years of Excellence</div></div>
-        <div class="wm"><div class="wmv">300<em>+</em></div><div class="wml">Enterprise Clients</div></div>
-        <div class="wm"><div class="wmv">5K<em>+</em></div><div class="wml">Networks Deployed</div></div>
-        <div class="wm"><div class="wmv">10M<em>+</em></div><div class="wml">Users Connected</div></div>
-        <div class="wm s2"><div class="wmv">99.9<em>%</em></div><div class="wml">Network Uptime SLA Guaranteed</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERTISE -->
-<section class="expertise" id="expertise">
-  <div class="container">
-    <div class="exp-hdr">
-      <span class="eyebrow">Core Expertise</span>
-      <h2 class="h2">Technology That <span>Powers Business</span></h2>
-      <p class="body-text">Our networking solutions help enterprises build a strong digital backbone — from LAN/WAN to Wi-Fi 6/6E and campus-wide connectivity.</p>
-    </div>
-    <div class="exp-grid">
-      <div class="ecell">
-        <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="1" y="16" width="6" height="6" rx="1"/><rect x="17" y="16" width="6" height="6" rx="1"/><path d="M6 19h12M12 8v8"/></svg></div>
-        <div class="etitle">Enterprise Switching</div>
-        <div class="edesc">L2/L3 managed switches engineered for performance, scalability, and stable traffic across large environments.</div>
-      </div>
-      <div class="ecell">
-        <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg></div>
-        <div class="etitle">Smart Connectivity</div>
-        <div class="edesc">Wi-Fi 6/6E access points and high-density wireless solutions for seamless coverage and secure roaming.</div>
-      </div>
-      <div class="ecell">
-        <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="etitle">Network Security</div>
-        <div class="edesc">Firewalls, VPNs, and NAC solutions with zero-trust access, threat prevention, and real-time monitoring.</div>
-      </div>
-      <div class="ecell">
-        <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="etitle">Secure Routing</div>
-        <div class="edesc">High-performance routers ensuring resilient, encrypted connectivity across multi-location businesses.</div>
-      </div>
-      <div class="ecell">
-        <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-        <div class="etitle">Cloud Management</div>
-        <div class="edesc">Centralized cloud and on-prem platforms with complete visibility, automated alerts, and intelligent control.</div>
-      </div>
-      <div class="ecell">
-        <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
-        <div class="etitle">Bespoke Solutions</div>
-        <div class="edesc">Industry-specific secure architectures designed for hospitals, campuses, hospitality, and more.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- INDUSTRIES -->
-<section class="industries" id="industries">
-  <div class="container">
-    <div class="ind-hdr">
-      <span class="eyebrow">Industries We Serve</span>
-      <h2 class="h2">Networks Built for <span>Your Sector</span></h2>
-    </div>
-    <div class="ind-grid">
-      <a href="#" class="icard"><div class="iibox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div class="iname">Enterprise</div></a>
-      <a href="#" class="icard"><div class="iibox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="iname">Healthcare</div></a>
-      <a href="#" class="icard"><div class="iibox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="iname">Hospitality</div></a>
-      <a href="#" class="icard"><div class="iibox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><div class="iname">Education</div></a>
-      <a href="#" class="icard"><div class="iibox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/></svg></div><div class="iname">Rural Areas</div></a>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials" id="testimonials">
-  <div class="container">
-    <div class="test-hdr">
-      <span class="eyebrow">Testimonials</span>
-      <h2 class="h2">Voices of <span>Trust</span></h2>
-      <p class="body-text">Real feedback from enterprises who've partnered with Immunity Networks.</p>
-    </div>
-    <div class="tgrid">
-      <div class="tcard">
-        <div class="tqmark">"</div>
-        <div class="tstars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="tbody">Immunity Networks' personalized service plan has helped increase productivity, saving us both time and money. Managing our Desktop Security technology has never been easier.</p>
-        <div class="tauthor"><div class="tavatar">RK</div><div><div class="tname">Rahul Kumar</div><div class="trole">Deputy Manager IT – JSW ISPAT STEEL LIMITED</div></div></div>
-      </div>
-      <div class="tcard">
-        <div class="tqmark">"</div>
-        <div class="tstars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="tbody">The Immunity team is extremely professional and expert in their domain. They flawlessly implemented the RSA logger solution — proactive, supportive, and delivered as expected.</p>
-        <div class="tauthor"><div class="tavatar">AW</div><div><div class="tname">Amit Wadke</div><div class="trole">Project Manager – TATA Consultancy Services</div></div></div>
-      </div>
-      <div class="tcard">
-        <div class="tqmark">"</div>
-        <div class="tstars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="tbody">Immunity professionals took time to fully understand BHEL's requirements and submitted a great design before implementation. We truly appreciate their structured, expert approach.</p>
-        <div class="tauthor"><div class="tavatar">SS</div><div><div class="tname">S.L. Sidar</div><div class="trole">IT Manager – Bharat Heavy Electricals Limited</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BANNER -->
-<div class="ctabanner" id="contact">
-  <div class="ctabanner-glow"></div>
-  <div class="ctainner">
-    <h2 class="ctatitle">Ready to Upgrade Your Network?</h2>
-    <p class="ctadesc">Talk to our experts today. We'll design a solution that's fast, secure, and built for your business.</p>
-    <div class="ctabtns">
-      <a href="tel:02246041626" class="btn-wh">📞 (022) 46041626</a>
-      <a href="mailto:contactus@immunitynetworks.com" class="btn-ow">✉ Email Us</a>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="fgrid">
-      <div>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div class="nav-icon">IN</div>
-          <div><div class="nav-name">Immunity Networks</div><span class="nav-sub">Intelligent Ecosystems</span></div>
-        </div>
-        <p class="fbdesc">Designing intelligent, secure, and scalable network ecosystems that empower enterprises to achieve seamless connectivity and digital resilience.</p>
-        <div class="fci">📍 804, DLH Park, Rani Sati Nagar, S.V. Road, Goregaon West, Mumbai 400064</div>
-        <div class="fci">📞 <a href="tel:02246041626">(022) 46041626 / 46013641</a></div>
-        <div class="fci">✉ <a href="mailto:contactus@immunitynetworks.com">contactus@immunitynetworks.com</a></div>
-      </div>
-      <div>
-        <div class="fcolhead">Solutions</div>
-        <ul class="flinks">
-          <li><a href="#">Enterprise Networking</a></li>
-          <li><a href="#">Rural Connectivity</a></li>
-          <li><a href="#">Hotels & Hospitality</a></li>
-          <li><a href="#">Healthcare</a></li>
-          <li><a href="#">Education</a></li>
-          <li><a href="#">Endpoint Security</a></li>
-          <li><a href="#">PM WANI</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="fcolhead">Products</div>
-        <ul class="flinks">
-          <li><a href="#">L3 Netforce</a></li>
-          <li><a href="#">L2 Netforce</a></li>
-          <li><a href="#">LinkOptix Module</a></li>
-          <li><a href="#">Gateway Controller</a></li>
-          <li><a href="#">Lotus Alpha AP</a></li>
-          <li><a href="#">POE Adapters</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="fcolhead">Company</div>
-        <ul class="flinks">
-          <li><a href="#">About Us</a></li>
-          <li><a href="http://blog.immunitynetworks.com">Blog</a></li>
-          <li><a href="https://jobs.immunitynetworks.com/jobs/Careers">Careers</a></li>
-          <li><a href="https://support.immunitynetworks.com/">Support</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="fbot">
-      <p class="fcopy">© 2024 Immunity Networks. All Rights Reserved.</p>
-      <div class="flegal">
-        <a href="#">Terms & Service</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Refund Policy</a>
-        <a href="#">E-Waste</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IMMUNITY NETWORKS | BRUTALIST DEFENSE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
-const prods=[
-  {cat:'Network Switch',name:'L3 Netforce',badge:'Layer 3 Switch',img:'https://www.immunitynetworks.com/images/l3/L3-netforce.png',desc:'Our L3 Switch enables fast, intelligent routing across complex environments, ensuring seamless communication between all network segments with enterprise-grade reliability.',feats:['Advanced Layer 3 routing for complex network infrastructures','Inter-VLAN routing with superior speed and flexibility','Dynamic routing protocols: OSPF, BGP, and RIP','Built-in redundancy and failover for high availability','ACLs, DHCP snooping, and IP Source Guard security']},
-  {cat:'Network Switch',name:'L2 Netforce',badge:'Layer 2 Switch',img:'https://www.immunitynetworks.com/images/l2/L2-netforce.png',desc:'Our L2 Switch delivers stable, high-speed connectivity with secure traffic segmentation — built to keep your network smooth and efficient at all times.',feats:['Layer 2 switching for seamless network connectivity','VLAN segmentation for secured traffic isolation','High-speed Ethernet ports with zero-lag performance','Easy plug-and-play deployment, minimal configuration','Enhanced QoS to prioritize critical applications']},
-  {cat:'Optical Transceiver',name:'LinkOptix Module',badge:'SFP Transceiver',img:'https://www.immunitynetworks.com/images/Linkoptix-T1G1.png',desc:'LinkOptix enhances internet quality through real-time link optimization, ensuring uninterrupted performance for critical workloads and mission-sensitive operations.',feats:['Smart link optimization for jitter-free internet','Real-time path selection by quality, latency & packet loss','Aggregates multiple connections for maximum uptime','Reduces video buffering, call drops, and app latency','Cloud-driven dashboard for easy monitoring & control']},
-  {cat:'Network Controller',name:'Gateway Controller',badge:'Enterprise Security',img:'https://www.immunitynetworks.com/images/main_gateway/Product-Images/Product_IGC-M.png',desc:'Centralize your wireless management with powerful security features, giving every user a safe and seamless online experience across your entire network.',feats:['Centralized control for all wireless access points','Advanced firewall, content filtering & IPS','Secure guest access with captive portal options','Real-time monitoring and analytics dashboard','Multi-WAN support for load balancing & uptime']},
-  {cat:'Wireless Access Point',name:'Lotus Alpha AP',badge:'Wi-Fi 6',img:'https://www.immunitynetworks.com/images/lotus/Lotus-Alpha.png',desc:'Next-gen Wi-Fi 6 access point delivering stronger, smarter wireless connectivity with superior speed and coverage for high-density environments indoors and outdoors.',feats:['Wi-Fi 6 (AX) for ultra-high-density environments','Indoor & Outdoor connectivity with wide coverage','MU-MIMO and OFDMA for multi-user efficiency','WPA3 enterprise-grade wireless encryption','Cloud management with auto-optimization engine']}
-];
-function sp(i,btn){
-  const p=prods[i];
-  document.getElementById('pCat').textContent=p.cat;
-  document.getElementById('pName').textContent=p.name;
-  document.getElementById('pDesc').textContent=p.desc;
-  document.getElementById('pBadge').textContent=p.badge;
-  const img=document.getElementById('pImg');
-  img.style.opacity='0';
-  setTimeout(()=>{img.src=p.img;img.style.opacity='1';},160);
-  document.getElementById('pFeats').innerHTML=p.feats.map(f=>`<li>${f}</li>`).join('');
-  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('on'));
-  btn.classList.add('on');
-}
-document.getElementById('pImg').style.transition='opacity 0.2s ease';
+    tailwind.config = {
+        theme: {
+            extend: {
+                animation: {
+                    'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    'glow': 'glow 2s ease-in-out infinite alternate',
+                },
+                keyframes: {
+                    glow: {
+                        '0%': { boxShadow: '0 0 5px var(--deep-crimson)' },
+                        '100%': { boxShadow: '0 0 20px var(--deep-crimson), 0 0 30px var(--bright-crimson)' }
+                    }
+                }
+            }
+        }
+    }
 </script>
-</body>
-</html>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --matte-black: #080808;
+            --deep-crimson: #990011;
+            --bright-crimson: #E6001A;
+            --grid-line: #1F1F1F;
+            --text-muted: #888888;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--matte-black);
+            color: #FFFFFF;
+            overflow-x: hidden;
+            position: relative;
+        }
+        #cursor-glow {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background: #E6001A;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            box-shadow: 0 0 15px #E6001A, 0 0 30px #E6001A, 0 0 50px #990011, 0 0 80px #990011;
+            display: block;
+            margin-left: -15px;
+            margin-top: -15px;
+        }
+        #cursor-glow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: transparent;
+            border: 2px solid #E6001A;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-ring 1.5s ease-out infinite;
+        }
+        @keyframes pulse-ring {
+            0% { width: 30px; height: 30px; opacity: 1; }
+            100% { width: 150px; height: 150px; opacity: 0; }
+        }
+        #cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--bright-crimson);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            box-shadow: 0 0 6px var(--bright-crimson);
+        }
+        .brutalist-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+        }
+        .crimson-overlay {
+            background: linear-gradient(45deg, rgba(153, 0, 17, 0.4) 0%, rgba(8, 8, 8, 0) 100%);
+            mix-blend-mode: multiply;
+        }
+        .sharp-divider {
+            border: 1px solid var(--grid-line);
+        }
+        .command-title {
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 0.85;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        .btn-brutalist {
+            transition: all 0.2s ease;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        .btn-brutalist:hover {
+            background-color: var(--bright-crimson);
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px rgba(153, 0, 17, 0.3);
+        }
+    </style>
+</head>
+<body class="selection:bg-[var(--deep-crimson)] selection:text-white">
+<div id="cursor-glow" style="position: fixed; left: -100px; top: -100px;"></div>
+<header class="fixed top-0 w-full z-[100] border-b border-[var(--grid-line)] bg-[var(--matte-black)]/95 backdrop-blur-md">
+<div class="max-w-[1800px] mx-auto px-8 md:px-12 h-20 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 bg-[var(--deep-crimson)] flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl animate-pulse">shield_lock</span>
+</div>
+<span class="font-extrabold text-xl tracking-tighter uppercase">Immunity <span class="text-[var(--deep-crimson)]">Networks</span></span>
+</div>
+<nav class="hidden lg:flex gap-12">
+<a class="text-xs font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors" href="#">Operations</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors" href="#">Architecture</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors" href="#">Intelligence</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors" href="#">Tactical</a>
+</nav>
+<div class="flex items-center gap-8">
+<span class="hidden sm:block text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest">System Status: Optimal</span>
+<button id="portal-btn" class="bg-[var(--deep-crimson)] text-white px-6 py-2 text-xs font-extrabold uppercase tracking-widest hover:bg-[var(--bright-crimson)] transition-all">Portal Access</button>
+</div>
+</div>
+</header>
+<main>
+<section class="min-h-screen relative flex flex-col items-center justify-center pt-20 border-b border-[var(--grid-line)] brutalist-grid overflow-hidden">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-20">
+<div class="absolute inset-0 bg-radial-gradient(from 50% 50%, var(--deep-crimson) 0%, transparent 70%)"></div>
+</div>
+<div class="relative z-10 text-center px-6">
+<span class="inline-block border border-[var(--deep-crimson)] text-[var(--bright-crimson)] px-4 py-1 text-[10px] font-extrabold uppercase tracking-[0.5em] mb-12">Defending Sovereign Infrastructure</span>
+<h1 class="command-title text-7xl md:text-9xl lg:text-[12rem] font-extrabold mb-12">
+                    IMMUNITY <br/>
+<span class="text-[var(--deep-crimson)]">IS MANDATORY</span>
+</h1>
+<p class="max-w-2xl mx-auto text-[var(--text-muted)] text-lg md:text-xl font-light leading-relaxed mb-16">
+                    Zero-latency defense protocols for critical digital assets. Hardened architecture engineered for the next generation of global cyber warfare.
+                </p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+<button id="init-protocol" class="btn-brutalist bg-[var(--deep-crimson)] text-white px-12 py-6 text-sm font-extrabold uppercase tracking-widest">
+                        Initialize Protocol
+                    </button>
+<button id="view-dossier" class="border border-[var(--grid-line)] hover:border-[var(--deep-crimson)] px-12 py-6 text-sm font-extrabold uppercase tracking-widest transition-all">
+                        View Dossier
+                    </button>
+</div>
+</div>
+<div class="absolute bottom-12 left-12 hidden xl:block">
+<div class="flex flex-col gap-4 text-[var(--text-muted)] font-mono text-[10px]">
+<div class="flex items-center gap-3"><span class="w-2 h-2 bg-[var(--deep-crimson)]"></span> LATITUDE: 47.3769° N</div>
+<div class="flex items-center gap-3"><span class="w-2 h-2 bg-[var(--grid-line)]"></span> LONGITUDE: 8.5417° E</div>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-2 lg:grid-cols-4 border-b border-[var(--grid-line)]">
+<div class="p-12 md:p-20 border-r border-[var(--grid-line)] flex flex-col justify-between aspect-square lg:aspect-auto">
+<span class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest">Success Rate</span>
+<div>
+<h3 class="text-5xl md:text-7xl font-extrabold">99.9%</h3>
+<div class="w-12 h-1 bg-[var(--deep-crimson)] mt-4"></div>
+</div>
+</div>
+<div class="p-12 md:p-20 border-r lg:border-r border-[var(--grid-line)] flex flex-col justify-between">
+<span class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest">Latency</span>
+<div>
+<h3 class="text-5xl md:text-7xl font-extrabold">12MS</h3>
+<div class="w-12 h-1 bg-[var(--grid-line)] mt-4"></div>
+</div>
+</div>
+<div class="p-12 md:p-20 border-r border-[var(--grid-line)] flex flex-col justify-between">
+<span class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest">Nodes</span>
+<div>
+<h3 class="text-5xl md:text-7xl font-extrabold">500+</h3>
+<div class="w-12 h-1 bg-[var(--deep-crimson)] mt-4"></div>
+</div>
+</div>
+<div class="p-12 md:p-20 flex flex-col justify-between">
+<span class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest">Vigilance</span>
+<div>
+<h3 class="text-5xl md:text-7xl font-extrabold">24/7</h3>
+<div class="w-12 h-1 bg-[var(--grid-line)] mt-4"></div>
+</div>
+</div>
+</section>
+<section class="bg-[var(--matte-black)]">
+<div class="grid grid-cols-1 lg:grid-cols-2 border-b border-[var(--grid-line)]">
+<div class="p-12 md:p-24 flex flex-col justify-center border-r border-[var(--grid-line)]">
+<h2 class="command-title text-6xl md:text-8xl font-extrabold mb-8">Defensive<br/><span class="text-[var(--deep-crimson)]">Ecosystem</span></h2>
+<p class="text-[var(--text-muted)] text-xl font-light max-w-lg mb-12 leading-relaxed">
+                        Precision engineering applied to cyber infrastructure. Each module operates in total autonomy or synchronized command.
+                    </p>
+<a id="deploy-system" class="text-[var(--bright-crimson)] font-bold text-xs uppercase tracking-widest flex items-center gap-4 group cursor-pointer" href="#">
+                        Deploy System Protocols
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-2">arrow_right_alt</span>
+</a>
+</div>
+<div class="bg-[var(--deep-crimson)] p-12 md:p-24 flex flex-col justify-end text-white">
+<span class="material-symbols-outlined text-8xl mb-12 opacity-40">shield_lock</span>
+<h3 class="text-4xl font-extrabold uppercase tracking-tight mb-6">Sovereign Sentinel</h3>
+<p class="text-lg font-light leading-relaxed mb-12 opacity-90">
+                        High-tier predictive analysis engine identifying zero-day threats through deep neural pattern recognition before they reach the edge.
+                    </p>
+<div class="pt-8 border-t border-white/20">
+<span class="font-mono text-xs uppercase tracking-widest opacity-60">Status: Operational // Zone A1</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3">
+<div class="p-12 border-r border-b md:border-b-0 border-[var(--grid-line)] hover:bg-[#111111] transition-colors cursor-pointer group">
+<div class="w-12 h-12 bg-[var(--grid-line)] mb-12 group-hover:bg-[var(--deep-crimson)] transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-white">hub</span>
+</div>
+<h4 class="text-2xl font-extrabold uppercase mb-4">Nexus Core</h4>
+<p class="text-[var(--text-muted)] text-sm font-light leading-relaxed">Central command for globally distributed networks. Real-time visualization of all tactical nodes.</p>
+</div>
+<div class="p-12 border-r border-b md:border-b-0 border-[var(--grid-line)] hover:bg-[#111111] transition-colors cursor-pointer group">
+<div class="w-12 h-12 bg-[var(--grid-line)] mb-12 group-hover:bg-[var(--deep-crimson)] transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-white">key</span>
+</div>
+<h4 class="text-2xl font-extrabold uppercase mb-4">Flux Crypt</h4>
+<p class="text-[var(--text-muted)] text-sm font-light leading-relaxed">Dynamic encryption key rotation synced to network heartbeats. Post-quantum cryptographic standards.</p>
+</div>
+<div class="p-12 border-b md:border-b-0 border-[var(--grid-line)] hover:bg-[#111111] transition-colors cursor-pointer group">
+<div class="w-12 h-12 bg-[var(--grid-line)] mb-12 group-hover:bg-[var(--deep-crimson)] transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-white">visibility_off</span>
+</div>
+<h4 class="text-2xl font-extrabold uppercase mb-4">Ghost Path</h4>
+<p class="text-[var(--text-muted)] text-sm font-light leading-relaxed">Invisible tunneling for high-value asset communication. No signature, no trace, no interception.</p>
+</div>
+</div>
+</section>
+<section class="border-t border-[var(--grid-line)]">
+<div class="grid grid-cols-1 lg:grid-cols-2">
+<div class="relative h-[600px] border-r border-[var(--grid-line)] overflow-hidden">
+<img alt="Secure Facility" class="w-full h-full object-cover grayscale brightness-50 contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe_EDCUp6QqKg7mk4o4Gp-GD5oi6KUJV7WYtHBaS8SpcQh5ftxLwBxYlraaSYjcb1x54uBFz_3fHMiOfnZ_tKmZUUHduNkNYRHdSQZWo9RWiuJ3t3wnXinQhPx5po-xf1hLKrFwtCkbnLJDhq_GZxIVwB-uKvZV81TPeUwsbrJm2_W-WdYymKR-95wP9qqI_do8r1S_SMl-Gvvuro7P7p4XkDXZI6N8inSxPVBNluFvd7Cggo6e3OtoBkEybPLRvaD5IasQJ51KIw"/>
+<div class="absolute inset-0 crimson-overlay"></div>
+<div class="absolute inset-0 p-12 flex flex-col justify-between">
+<span class="bg-[var(--deep-crimson)] text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest w-fit">Case: 08-Finance</span>
+<div>
+<h3 class="text-4xl font-extrabold uppercase mb-4">The Global Vault</h3>
+<p class="text-sm font-mono uppercase tracking-widest text-white/70">European Central Bank / Defense Protocol Deployment</p>
+</div>
+</div>
+</div>
+<div class="relative h-[600px] overflow-hidden">
+<img alt="Network Grid" class="w-full h-full object-cover grayscale brightness-50 contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzkBYfRLD-XDA1LQpD1qWER-C2iIsv43KXXsv5ffY7A-9Mkh0fA1K1EyAla4akvQJI6JOjElREQw_ZiTo5bPciG0Jzy4wP0xpwgpk4kbmFzYH48AfGkM3EXbsc1z2GDSARL4SxUBMyY2zMaqLB7vcaEGaUN-yZqh1_d_B4SQ0IN9P9wFwu-MW7njn0jyyEOGWqJ_lMe5Xn3ksuDKWV3iJih6nlFHPOEqTU6q26ym8oXTIa1Ie8w0-u0D530FNC3kfRLRTiULTxpLI"/>
+<div class="absolute inset-0 bg-black/60 mix-blend-multiply"></div>
+<div class="absolute inset-0 p-12 flex flex-col justify-between">
+<span class="border border-white/30 text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest w-fit">Case: 12-Energy</span>
+<div>
+<h3 class="text-4xl font-extrabold uppercase mb-4">Continental Grid</h3>
+<p class="text-sm font-mono uppercase tracking-widest text-white/70">Critical Power Distribution Hardening</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-[var(--matte-black)] border-y border-[var(--grid-line)]">
+<div class="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+<div class="lg:col-span-4 p-12 md:p-24 border-r border-[var(--grid-line)]">
+<h2 class="command-title text-5xl font-extrabold mb-12">TACTICAL<br/><span class="text-[var(--deep-crimson)]">EXPERTISE</span></h2>
+<ul class="space-y-8">
+<li class="flex items-center gap-6">
+<span class="w-3 h-3 bg-[var(--deep-crimson)]"></span>
+<span class="text-xs font-bold uppercase tracking-[0.3em]">Quantum Readiness</span>
+</li>
+<li class="flex items-center gap-6">
+<span class="w-3 h-3 bg-[var(--grid-line)]"></span>
+<span class="text-xs font-bold uppercase tracking-[0.3em]">Forensic Integrity</span>
+</li>
+<li class="flex items-center gap-6">
+<span class="w-3 h-3 bg-[var(--deep-crimson)]"></span>
+<span class="text-xs font-bold uppercase tracking-[0.3em]">Neural Scanning</span>
+</li>
+</ul>
+</div>
+<div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2">
+<div class="p-12 md:p-20 border-r border-b border-[var(--grid-line)]">
+<span class="font-mono text-[var(--deep-crimson)] text-xs mb-6 block">REQ_01</span>
+<h4 class="text-2xl font-extrabold uppercase mb-6">Threat Intelligence</h4>
+<p class="text-[var(--text-muted)] font-light leading-relaxed">Aggressive harvesting of adversary behavioral data to build preemptive defense postures before attack initialization.</p>
+</div>
+<div class="p-12 md:p-20 border-b border-[var(--grid-line)]">
+<span class="font-mono text-[var(--deep-crimson)] text-xs mb-6 block">REQ_02</span>
+<h4 class="text-2xl font-extrabold uppercase mb-6">Auto Remediation</h4>
+<p class="text-[var(--text-muted)] font-light leading-relaxed">Self-healing infrastructures that detect lateral movement and isolate nodes in sub-millisecond cycles without human intervention.</p>
+</div>
+<div class="p-12 md:p-20 border-r border-[var(--grid-line)] md:border-b-0">
+<span class="font-mono text-[var(--deep-crimson)] text-xs mb-6 block">REQ_03</span>
+<h4 class="text-2xl font-extrabold uppercase mb-6">Hardened Edge</h4>
+<p class="text-[var(--text-muted)] font-light leading-relaxed">Computing power deployed at the absolute network perimeter, eliminating vulnerabilities inherent in centralized data loops.</p>
+</div>
+<div class="p-12 md:p-20">
+<span class="font-mono text-[var(--deep-crimson)] text-xs mb-6 block">REQ_04</span>
+<h4 class="text-2xl font-extrabold uppercase mb-6">Sovereign Identity</h4>
+<p class="text-[var(--text-muted)] font-light leading-relaxed">Behavioral-based multi-layered authentication that adapts to real-time environment threat levels and user posture.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="p-12 md:p-32 text-center brutalist-grid border-b border-[var(--grid-line)]">
+<div class="max-w-4xl mx-auto">
+<span class="material-symbols-outlined text-[var(--deep-crimson)] text-6xl mb-12">format_quote</span>
+<h2 class="text-3xl md:text-5xl font-extrabold uppercase leading-tight mb-16 italic">
+                    "Immunity Networks has redefined what we thought was possible in digital resilience. They are the <span class="text-[var(--deep-crimson)]">only partner</span> we trust with our most sensitive intelligence assets."
+                </h2>
+<div class="inline-block pt-12 border-t-4 border-[var(--deep-crimson)]">
+<p class="text-xl font-extrabold uppercase tracking-widest mb-2">Director of Intelligence</p>
+<p class="text-xs font-mono text-[var(--text-muted)] uppercase tracking-[0.2em]">Confidential Government Agency</p>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 lg:grid-cols-2">
+<div class="p-12 md:p-24 border-r border-[var(--grid-line)]">
+<h2 class="command-title text-6xl md:text-7xl font-extrabold mb-12">SECURE <br/><span class="text-[var(--deep-crimson)]">DIALOGUE</span></h2>
+<p class="text-[var(--text-muted)] text-xl font-light mb-16 leading-relaxed">
+                    For inquiries regarding sovereign-grade infrastructure defense, please initiate a request via encrypted channels.
+                </p>
+<div class="space-y-8 font-mono text-sm uppercase tracking-widest">
+<div class="flex items-center gap-6">
+<span class="text-[var(--deep-crimson)]">LOC:</span>
+<span>Zurich, Switzerland [HQ]</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-[var(--deep-crimson)]">PGP:</span>
+<span>0xFD29B4A8E2...</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-[var(--deep-crimson)]">TEL:</span>
+<span>+41 (0) 44 211 44 55</span>
+</div>
+</div>
+</div>
+<div class="p-12 md:p-24 bg-[var(--grid-line)]/20">
+<form id="contact-form" class="space-y-12">
+<div class="relative">
+<label class="text-[10px] font-extrabold uppercase tracking-[0.3em] text-[var(--text-muted)] mb-4 block">Identification</label>
+<input class="w-full bg-transparent border-0 border-b-2 border-[var(--grid-line)] focus:ring-0 focus:border-[var(--deep-crimson)] py-4 text-white uppercase font-bold placeholder:text-white/20 transition-all" placeholder="FULL NAME / AGENCY" type="text"/>
+</div>
+<div class="relative">
+<label class="text-[10px] font-extrabold uppercase tracking-[0.3em] text-[var(--text-muted)] mb-4 block">Secure Endpoint</label>
+<input class="w-full bg-transparent border-0 border-b-2 border-[var(--grid-line)] focus:ring-0 focus:border-[var(--deep-crimson)] py-4 text-white uppercase font-bold placeholder:text-white/20 transition-all" placeholder="EMAIL@AGENCY.SEC" type="email"/>
+</div>
+<div class="relative">
+<label class="text-[10px] font-extrabold uppercase tracking-[0.3em] text-[var(--text-muted)] mb-4 block">Defense Scope</label>
+<textarea class="w-full bg-transparent border-0 border-b-2 border-[var(--grid-line)] focus:ring-0 focus:border-[var(--deep-crimson)] py-4 text-white uppercase font-bold placeholder:text-white/20 transition-all" placeholder="BRIEF OVERVIEW OF OPERATIONAL REQUIREMENTS" rows="4"></textarea>
+</div>
+<button id="submit-form" class="w-full bg-white text-[var(--matte-black)] hover:bg-[var(--deep-crimson)] hover:text-white py-8 text-sm font-extrabold uppercase tracking-[0.4em] transition-all">
+                        Initialize Secure Link
+                    </button>
+</form>
+</div>
+</section>
+</main>
+<footer class="bg-[var(--matte-black)] border-t border-[var(--grid-line)] p-12 md:p-24">
+<div class="max-w-[1800px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+<div class="lg:col-span-2">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-6 h-6 bg-[var(--deep-crimson)]"></div>
+<span class="font-extrabold text-xl tracking-tighter uppercase">Immunity Networks</span>
+</div>
+<p class="max-w-md text-[var(--text-muted)] font-light leading-relaxed mb-12">
+                    Sovereign digital defense for critical infrastructure. Engineering precision in an era of asymmetric warfare.
+                </p>
+<p class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">© 2024 Immunity Networks // ALL RIGHTS RESERVED</p>
+</div>
+<div>
+<h5 class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-white mb-8">Navigation</h5>
+<ul class="space-y-4 text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Tactical Modules</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Arch Intelligence</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Command Port</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Global Node Map</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-white mb-8">Compliance</h5>
+<ul class="space-y-4 text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Privacy Protocol</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Terms of Op</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">Secure Disclosure</a></li>
+<li><a class="hover:text-[var(--deep-crimson)] transition-colors" href="#">PGP Public Key</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+    // Portal Access Modal
+    const portalBtn = document.getElementById('portal-btn');
+    const initProtocol = document.getElementById('init-protocol');
+    const viewDossier = document.getElementById('view-dossier');
+    const deploySystem = document.getElementById('deploy-system');
+    const contactForm = document.getElementById('contact-form');
+    const submitForm = document.getElementById('submit-form');
+
+    // Create modal overlay
+    const modalOverlay = document.createElement('div');
+    modalOverlay.className = 'fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] hidden items-center justify-center';
+    modalOverlay.innerHTML = `
+        <div id="modal-content" class="bg-[#080808] border border-[var(--grid-line)] p-8 md:p-12 max-w-md w-full mx-4 transform scale-95 opacity-0 transition-all duration-300" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);">
+            <div id="modal-body"></div>
+        </div>
+    `;
+    document.body.appendChild(modalOverlay);
+
+    const modalContent = document.getElementById('modal-content');
+    const modalBody = document.getElementById('modal-body');
+
+    function showModal(content) {
+        modalBody.innerHTML = content;
+        modalOverlay.classList.remove('hidden');
+        modalOverlay.classList.add('flex');
+        setTimeout(() => {
+            modalContent.style.transform = 'translate(-50%, -50%) scale(1)';
+            modalContent.style.opacity = '1';
+        }, 10);
+    }
+
+    function hideModal() {
+        modalContent.style.transform = 'translate(-50%, -50%) scale(0.95)';
+        modalContent.style.opacity = '0';
+        setTimeout(() => {
+            modalOverlay.classList.add('hidden');
+            modalOverlay.classList.remove('flex');
+        }, 300);
+    }
+
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) hideModal();
+    });
+
+    // Portal Access
+    portalBtn.addEventListener('click', () => {
+        showModal(`
+            <div class="text-center">
+                <span class="material-symbols-outlined text-[var(--deep-crimson)] text-5xl mb-6">shield_lock</span>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">Portal Authentication</h3>
+                <p class="text-[var(--text-muted)] text-sm mb-8">Enter your secure credentials to access the command portal.</p>
+                <form id="portal-form" class="space-y-6">
+                    <input type="text" placeholder="OPERATOR ID" class="w-full bg-[#111] border border-[var(--grid-line)] px-4 py-3 text-sm uppercase tracking-widest focus:border-[var(--deep-crimson)] outline-none transition-colors" required>
+                    <input type="password" placeholder="ACCESS CODE" class="w-full bg-[#111] border border-[var(--grid-line)] px-4 py-3 text-sm uppercase tracking-widest focus:border-[var(--deep-crimson)] outline-none transition-colors" required>
+                    <button type="submit" class="w-full bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-6 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Authenticate</button>
+                </form>
+                <button id="close-portal" class="mt-4 text-[var(--text-muted)] text-xs uppercase tracking-widest hover:text-white transition-colors">Cancel</button>
+            </div>
+        `);
+        document.getElementById('portal-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showModal(`
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-green-500 text-5xl mb-6">check_circle</span>
+                    <h3 class="text-2xl font-extrabold uppercase mb-4">Access Granted</h3>
+                    <p class="text-[var(--text-muted)] text-sm mb-8">Welcome back, Operator. Redirecting to command center...</p>
+                </div>
+            `);
+            setTimeout(hideModal, 2000);
+        });
+        document.getElementById('close-portal').addEventListener('click', hideModal);
+    });
+
+    // Initialize Protocol
+    initProtocol.addEventListener('click', () => {
+        showModal(`
+            <div class="text-center">
+                <div class="w-16 h-16 border-4 border-[var(--deep-crimson)] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">Initializing Protocol</h3>
+                <p class="text-[var(--text-muted)] text-sm mb-8">Deploying defensive countermeasures across all nodes...</p>
+                <div id="progress-bar" class="w-full bg-[#111] h-2 mb-4">
+                    <div id="progress-fill" class="bg-[var(--deep-crimson)] h-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <p id="progress-text" class="font-mono text-xs text-[var(--deep-crimson)]">0% Complete</p>
+            </div>
+        `);
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 10;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = progress + '% Complete';
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    showModal(`
+                        <div class="text-center">
+                            <span class="material-symbols-outlined text-green-500 text-5xl mb-6">verified</span>
+                            <h3 class="text-2xl font-extrabold uppercase mb-4">Protocol Active</h3>
+                            <p class="text-[var(--text-muted)] text-sm mb-8">All systems operational. Network is secured.</p>
+                            <button id="close-protocol" class="bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-8 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Acknowledge</button>
+                        </div>
+                    `);
+                    document.getElementById('close-protocol').addEventListener('click', hideModal);
+                }, 500);
+            }
+        }, 200);
+    });
+
+    // View Dossier
+    viewDossier.addEventListener('click', () => {
+        showModal(`
+            <div>
+                <h3 class="text-2xl font-extrabold uppercase mb-6 flex items-center gap-3">
+                    <span class="material-symbols-outlined text-[var(--deep-crimson)]">folder_open</span>
+                    Classified Dossier
+                </h3>
+                <div class="space-y-4 max-h-96 overflow-y-auto">
+                    <div class="bg-[#111] border border-[var(--grid-line)] p-4">
+                        <h4 class="text-sm font-bold uppercase text-[var(--deep-crimson)] mb-2">Operation: Shadow Wall</h4>
+                        <p class="text-xs text-[var(--text-muted)]">Classification: TOP SECRET</p>
+                        <p class="text-xs text-[var(--text-muted)] mt-2">Deployed multi-layered defense grid across Eastern European financial sector. Neutralized 847 intrusion attempts in 72 hours.</p>
+                    </div>
+                    <div class="bg-[#111] border border-[var(--grid-line)] p-4">
+                        <h4 class="text-sm font-bold uppercase text-[var(--deep-crimson)] mb-2">Operation: Iron Veil</h4>
+                        <p class="text-xs text-[var(--text-muted)]">Classification: RESTRICTED</p>
+                        <p class="text-xs text-[var(--text-muted)] mt-2">Hardened critical energy infrastructure against state-sponsored APT groups. Zero breaches recorded over 18 months.</p>
+                    </div>
+                    <div class="bg-[#111] border border-[var(--grid-line)] p-4">
+                        <h4 class="text-sm font-bold uppercase text-[var(--deep-crimson)] mb-2">Operation: Ghost Protocol</h4>
+                        <p class="text-xs text-[var(--text-muted)]">Classification: CONFIDENTIAL</p>
+                        <p class="text-xs text-[var(--text-muted)] mt-2">Implemented undetectable communication channels for diplomatic entities. Complete operational secrecy maintained.</p>
+                    </div>
+                </div>
+                <button id="close-dossier" class="mt-6 w-full border border-[var(--grid-line)] hover:border-[var(--deep-crimson)] px-6 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Close Archive</button>
+            </div>
+        `);
+        document.getElementById('close-dossier').addEventListener('click', hideModal);
+    });
+
+    // Deploy System Protocols
+    deploySystem.addEventListener('click', (e) => {
+        e.preventDefault();
+        showModal(`
+            <div class="text-center">
+                <span class="material-symbols-outlined text-[var(--deep-crimson)] text-5xl mb-6">hub</span>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">System Deployment</h3>
+                <p class="text-[var(--text-muted)] text-sm mb-8">Select modules to deploy:</p>
+                <div class="space-y-3">
+                    <label class="flex items-center gap-3 bg-[#111] border border-[var(--grid-line)] p-3 cursor-pointer hover:border-[var(--deep-crimson)] transition-colors">
+                        <input type="checkbox" checked class="w-4 h-4 accent-[var(--deep-crimson)]">
+                        <span class="text-sm font-bold uppercase">Nexus Core</span>
+                    </label>
+                    <label class="flex items-center gap-3 bg-[#111] border border-[var(--grid-line)] p-3 cursor-pointer hover:border-[var(--deep-crimson)] transition-colors">
+                        <input type="checkbox" checked class="w-4 h-4 accent-[var(--deep-crimson)]">
+                        <span class="text-sm font-bold uppercase">Flux Crypt</span>
+                    </label>
+                    <label class="flex items-center gap-3 bg-[#111] border border-[var(--grid-line)] p-3 cursor-pointer hover:border-[var(--deep-crimson)] transition-colors">
+                        <input type="checkbox" checked class="w-4 h-4 accent-[var(--deep-crimson)]">
+                        <span class="text-sm font-bold uppercase">Ghost Path</span>
+                    </label>
+                </div>
+                <button id="confirm-deploy" class="mt-6 w-full bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-6 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Deploy Selected</button>
+            </div>
+        `);
+        document.getElementById('confirm-deploy').addEventListener('click', () => {
+            showModal(`
+                <div class="text-center">
+                    <div class="w-16 h-16 border-4 border-[var(--deep-crimson)] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                    <h3 class="text-2xl font-extrabold uppercase mb-4">Deploying...</h3>
+                    <p class="text-[var(--text-muted)] text-sm">Modules are being initialized across the network.</p>
+                </div>
+            `);
+            setTimeout(() => {
+                showModal(`
+                    <div class="text-center">
+                        <span class="material-symbols-outlined text-green-500 text-5xl mb-6">check_circle</span>
+                        <h3 class="text-2xl font-extrabold uppercase mb-4">Deployment Complete</h3>
+                        <p class="text-[var(--text-muted)] text-sm mb-8">All selected modules are now operational.</p>
+                        <button id="close-deploy" class="bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-8 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Confirm</button>
+                    </div>
+                `);
+                document.getElementById('close-deploy').addEventListener('click', hideModal);
+            }, 2000);
+        });
+    });
+
+    // Contact Form
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        const values = {};
+        inputs.forEach(input => {
+            values[input.placeholder] = input.value;
+        });
+        
+        showModal(`
+            <div class="text-center">
+                <div class="w-16 h-16 border-4 border-[var(--deep-crimson)] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">Transmitting...</h3>
+                <p class="text-[var(--text-muted)] text-sm">Encrypting and sending via secure channels.</p>
+            </div>
+        `);
+        setTimeout(() => {
+            showModal(`
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-green-500 text-5xl mb-6">lock_clock</span>
+                    <h3 class="text-2xl font-extrabold uppercase mb-4">Transmission Complete</h3>
+                    <p class="text-[var(--text-muted)] text-sm mb-8">Your request has been received. Expect encrypted response within 24 hours.</p>
+                    <button id="close-contact" class="bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-8 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Close</button>
+                </div>
+            `);
+            document.getElementById('close-contact').addEventListener('click', hideModal);
+            contactForm.reset();
+        }, 1500);
+    });
+        
+        showModal(`
+            <div class="text-center">
+                <div class="w-16 h-16 border-4 border-[var(--deep-crimson)] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                <h3 class="text-2xl font-extrabold uppercase mb-4">Transmitting...</h3>
+                <p class="text-[var(--text-muted)] text-sm">Encrypting and sending via secure channels.</p>
+            </div>
+        `);
+        setTimeout(() => {
+            showModal(`
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-green-500 text-5xl mb-6">lock_clock</span>
+                    <h3 class="text-2xl font-extrabold uppercase mb-4">Transmission Complete</h3>
+                    <p class="text-[var(--text-muted)] text-sm mb-8">Your request has been received. Expect encrypted response within 24 hours.</p>
+                    <button id="close-contact" class="bg-[var(--deep-crimson)] hover:bg-[var(--bright-crimson)] px-8 py-3 text-xs font-extrabold uppercase tracking-widest transition-colors">Close</button>
+                </div>
+            `);
+            document.getElementById('close-contact').addEventListener('click', hideModal);
+            contactForm.reset();
+        }, 1500);
+// End of contact form handler
+
+    // Add smooth scroll for navigation
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const text = link.textContent.toLowerCase();
+            const sections = {
+                'operations': 0,
+                'architecture': 1,
+                'intelligence': 2,
+                'tactical': 3
+            };
+            if (sections[text] !== undefined) {
+                const sectionIndex = sections[text];
+                const allSections = document.querySelectorAll('main section');
+                if (allSections[sectionIndex]) {
+                    allSections[sectionIndex].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    // Add scroll reveal animation
+    const revealElements = document.querySelectorAll('section:not(:first-of-type)');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        revealObserver.observe(element);
+    });
+
+    // Add counter animation for stats
+    function animateCounter(element, target, suffix = '') {
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current) + suffix;
+        }, 30);
+    }
+
+    // Intersection Observer for stats animation
+    const statsSection = document.querySelectorAll('section')[1];
+    if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statValues = entry.target.querySelectorAll('h3');
+                    statValues.forEach(stat => {
+                        const text = stat.textContent;
+                        if (text.includes('99.9')) {
+                            animateCounter(stat, 99.9, '%');
+                        } else if (text.includes('12')) {
+                            animateCounter(stat, 12, 'MS');
+                        } else if (text.includes('500')) {
+                            animateCounter(stat, 500, '+');
+                        } else if (text.includes('24')) {
+                            animateCounter(stat, 24, '/7');
+                        }
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(statsSection);
+    }
+
+    // Add typing effect to hero subtitle
+    const heroSubtitle = document.querySelector('section:first-of-type p');
+    if (heroSubtitle) {
+        const originalText = heroSubtitle.textContent;
+        heroSubtitle.textContent = '';
+        let charIndex = 0;
+        
+        function typeText() {
+            if (charIndex < originalText.length) {
+                heroSubtitle.textContent += originalText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeText, 20);
+            }
+        }
+        
+        setTimeout(typeText, 500);
+    }
+
+    // Add pulse effect to status indicator
+    const statusIndicator = document.querySelector('.hidden.sm\\\\:block');
+    if (statusIndicator) {
+        statusIndicator.classList.add('animate-pulse');
+    }
+
+    // Add mobile menu toggle
+    const menuBtn = document.createElement('button');
+    menuBtn.id = 'menu-btn';
+    menuBtn.className = 'lg:hidden text-white';
+    menuBtn.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+    
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+    
+    if (header && nav) {
+        const portalBtnEl = document.getElementById('portal-btn');
+        if (portalBtnEl && portalBtnEl.parentElement) {
+            portalBtnEl.parentElement.insertBefore(menuBtn, portalBtnEl);
+        }
+        
+        const mobileMenu = document.createElement('div');
+        mobileMenu.id = 'mobile-menu';
+        mobileMenu.className = 'fixed inset-0 bg-[var(--matte-black)] z-[90] hidden flex-col items-center justify-center gap-8';
+        mobileMenu.innerHTML = `
+            <a class="text-xl font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors mobile-link" href="#">Operations</a>
+            <a class="text-xl font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors mobile-link" href="#">Architecture</a>
+            <a class="text-xl font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors mobile-link" href="#">Intelligence</a>
+            <a class="text-xl font-bold uppercase tracking-widest hover:text-[var(--deep-crimson)] transition-colors mobile-link" href="#">Tactical</a>
+            <button id="close-menu" class="absolute top-8 right-8 text-white">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        `;
+        document.body.appendChild(mobileMenu);
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
+        });
+        
+        document.getElementById('close-menu').addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        });
+        
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+    }
+
+    // Mouse follow effect - instant follow
+    const cursorGlow = document.getElementById('cursor-glow');
+    cursorGlow.style.opacity = '0';
+    cursorGlow.style.transition = 'opacity 0.2s ease';
+    
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+        cursorGlow.style.opacity = '1';
+    });
+    
+    // Hide custom cursor on touch devices
+    if ('ontouchstart' in window) {
+        cursorGlow.style.display = 'none';
+    }
+</script>
+
+</body></html>
